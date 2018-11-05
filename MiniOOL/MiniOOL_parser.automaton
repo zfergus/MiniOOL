@@ -1,0 +1,1690 @@
+State 0:
+prog' -> . prog [ # ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On prog shift to state 87
+-- On expr shift to state 66
+-- On cmds shift to state 88
+-- On cmd shift to state 80
+-- On EOL reduce production cmds -> 
+
+State 1:
+cmd -> WHILE . bool_expr cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On NOT shift to state 32
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 33
+-- On IDENT shift to state 12
+-- On BOOL shift to state 34
+-- On expr shift to state 51
+-- On bool_expr shift to state 85
+
+State 2:
+expr -> PROC . IDENT COLON cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On IDENT shift to state 3
+
+State 3:
+expr -> PROC IDENT . COLON cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On COLON shift to state 4
+
+State 4:
+expr -> PROC IDENT COLON . cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On expr shift to state 66
+-- On cmd shift to state 84
+
+State 5:
+cmd -> VAR . IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On IDENT shift to state 6
+
+State 6:
+cmd -> VAR IDENT . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> VAR IDENT 
+-- On VAR reduce production cmd -> VAR IDENT 
+-- On TIMES reduce production cmd -> VAR IDENT 
+-- On SKIP reduce production cmd -> VAR IDENT 
+-- On SEMICOLON reduce production cmd -> VAR IDENT 
+-- On RPAREN reduce production cmd -> VAR IDENT 
+-- On RBRACE reduce production cmd -> VAR IDENT 
+-- On PROC reduce production cmd -> VAR IDENT 
+-- On PLUS reduce production cmd -> VAR IDENT 
+-- On PARALLEL reduce production cmd -> VAR IDENT 
+-- On OR reduce production cmd -> VAR IDENT 
+-- On NUM reduce production cmd -> VAR IDENT 
+-- On NULL reduce production cmd -> VAR IDENT 
+-- On MINUS reduce production cmd -> VAR IDENT 
+-- On MALLOC reduce production cmd -> VAR IDENT 
+-- On LPAREN reduce production cmd -> VAR IDENT 
+-- On LBRACE reduce production cmd -> VAR IDENT 
+-- On IS_NOT_EQUAL reduce production cmd -> VAR IDENT 
+-- On IS_LESS_EQUAL reduce production cmd -> VAR IDENT 
+-- On IS_LESS reduce production cmd -> VAR IDENT 
+-- On IS_GREATER_EQUAL reduce production cmd -> VAR IDENT 
+-- On IS_GREATER reduce production cmd -> VAR IDENT 
+-- On IS_EQUAL reduce production cmd -> VAR IDENT 
+-- On IF reduce production cmd -> VAR IDENT 
+-- On IDENT reduce production cmd -> VAR IDENT 
+-- On EOL reduce production cmd -> VAR IDENT 
+-- On ELSE reduce production cmd -> VAR IDENT 
+-- On DOT reduce production cmd -> VAR IDENT 
+-- On DIV reduce production cmd -> VAR IDENT 
+-- On ATOM reduce production cmd -> VAR IDENT 
+-- On AND reduce production cmd -> VAR IDENT 
+
+State 7:
+cmd -> SKIP . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> SKIP 
+-- On VAR reduce production cmd -> SKIP 
+-- On TIMES reduce production cmd -> SKIP 
+-- On SKIP reduce production cmd -> SKIP 
+-- On SEMICOLON reduce production cmd -> SKIP 
+-- On RPAREN reduce production cmd -> SKIP 
+-- On RBRACE reduce production cmd -> SKIP 
+-- On PROC reduce production cmd -> SKIP 
+-- On PLUS reduce production cmd -> SKIP 
+-- On PARALLEL reduce production cmd -> SKIP 
+-- On OR reduce production cmd -> SKIP 
+-- On NUM reduce production cmd -> SKIP 
+-- On NULL reduce production cmd -> SKIP 
+-- On MINUS reduce production cmd -> SKIP 
+-- On MALLOC reduce production cmd -> SKIP 
+-- On LPAREN reduce production cmd -> SKIP 
+-- On LBRACE reduce production cmd -> SKIP 
+-- On IS_NOT_EQUAL reduce production cmd -> SKIP 
+-- On IS_LESS_EQUAL reduce production cmd -> SKIP 
+-- On IS_LESS reduce production cmd -> SKIP 
+-- On IS_GREATER_EQUAL reduce production cmd -> SKIP 
+-- On IS_GREATER reduce production cmd -> SKIP 
+-- On IS_EQUAL reduce production cmd -> SKIP 
+-- On IF reduce production cmd -> SKIP 
+-- On IDENT reduce production cmd -> SKIP 
+-- On EOL reduce production cmd -> SKIP 
+-- On ELSE reduce production cmd -> SKIP 
+-- On DOT reduce production cmd -> SKIP 
+-- On DIV reduce production cmd -> SKIP 
+-- On ATOM reduce production cmd -> SKIP 
+-- On AND reduce production cmd -> SKIP 
+
+State 8:
+expr -> NUM . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production expr -> NUM 
+-- On VAR reduce production expr -> NUM 
+-- On TIMES reduce production expr -> NUM 
+-- On SKIP reduce production expr -> NUM 
+-- On SEMICOLON reduce production expr -> NUM 
+-- On RPAREN reduce production expr -> NUM 
+-- On RBRACE reduce production expr -> NUM 
+-- On PROC reduce production expr -> NUM 
+-- On PLUS reduce production expr -> NUM 
+-- On PARALLEL reduce production expr -> NUM 
+-- On OR reduce production expr -> NUM 
+-- On NUM reduce production expr -> NUM 
+-- On NULL reduce production expr -> NUM 
+-- On MINUS reduce production expr -> NUM 
+-- On MALLOC reduce production expr -> NUM 
+-- On LPAREN reduce production expr -> NUM 
+-- On LBRACE reduce production expr -> NUM 
+-- On IS_NOT_EQUAL reduce production expr -> NUM 
+-- On IS_LESS_EQUAL reduce production expr -> NUM 
+-- On IS_LESS reduce production expr -> NUM 
+-- On IS_GREATER_EQUAL reduce production expr -> NUM 
+-- On IS_GREATER reduce production expr -> NUM 
+-- On IS_EQUAL reduce production expr -> NUM 
+-- On IF reduce production expr -> NUM 
+-- On IDENT reduce production expr -> NUM 
+-- On EOL reduce production expr -> NUM 
+-- On ELSE reduce production expr -> NUM 
+-- On DOT reduce production expr -> NUM 
+-- On DIV reduce production expr -> NUM 
+-- On ATOM reduce production expr -> NUM 
+-- On AND reduce production expr -> NUM 
+
+State 9:
+expr -> NULL . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production expr -> NULL 
+-- On VAR reduce production expr -> NULL 
+-- On TIMES reduce production expr -> NULL 
+-- On SKIP reduce production expr -> NULL 
+-- On SEMICOLON reduce production expr -> NULL 
+-- On RPAREN reduce production expr -> NULL 
+-- On RBRACE reduce production expr -> NULL 
+-- On PROC reduce production expr -> NULL 
+-- On PLUS reduce production expr -> NULL 
+-- On PARALLEL reduce production expr -> NULL 
+-- On OR reduce production expr -> NULL 
+-- On NUM reduce production expr -> NULL 
+-- On NULL reduce production expr -> NULL 
+-- On MINUS reduce production expr -> NULL 
+-- On MALLOC reduce production expr -> NULL 
+-- On LPAREN reduce production expr -> NULL 
+-- On LBRACE reduce production expr -> NULL 
+-- On IS_NOT_EQUAL reduce production expr -> NULL 
+-- On IS_LESS_EQUAL reduce production expr -> NULL 
+-- On IS_LESS reduce production expr -> NULL 
+-- On IS_GREATER_EQUAL reduce production expr -> NULL 
+-- On IS_GREATER reduce production expr -> NULL 
+-- On IS_EQUAL reduce production expr -> NULL 
+-- On IF reduce production expr -> NULL 
+-- On IDENT reduce production expr -> NULL 
+-- On EOL reduce production expr -> NULL 
+-- On ELSE reduce production expr -> NULL 
+-- On DOT reduce production expr -> NULL 
+-- On DIV reduce production expr -> NULL 
+-- On ATOM reduce production expr -> NULL 
+-- On AND reduce production expr -> NULL 
+
+State 10:
+expr -> MINUS . expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 25
+
+State 11:
+expr -> LPAREN . expr RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 13
+
+State 12:
+expr -> IDENT . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production expr -> IDENT 
+-- On VAR reduce production expr -> IDENT 
+-- On TIMES reduce production expr -> IDENT 
+-- On SKIP reduce production expr -> IDENT 
+-- On SEMICOLON reduce production expr -> IDENT 
+-- On RPAREN reduce production expr -> IDENT 
+-- On RBRACE reduce production expr -> IDENT 
+-- On PROC reduce production expr -> IDENT 
+-- On PLUS reduce production expr -> IDENT 
+-- On PARALLEL reduce production expr -> IDENT 
+-- On OR reduce production expr -> IDENT 
+-- On NUM reduce production expr -> IDENT 
+-- On NULL reduce production expr -> IDENT 
+-- On MINUS reduce production expr -> IDENT 
+-- On MALLOC reduce production expr -> IDENT 
+-- On LPAREN reduce production expr -> IDENT 
+-- On LBRACE reduce production expr -> IDENT 
+-- On IS_NOT_EQUAL reduce production expr -> IDENT 
+-- On IS_LESS_EQUAL reduce production expr -> IDENT 
+-- On IS_LESS reduce production expr -> IDENT 
+-- On IS_GREATER_EQUAL reduce production expr -> IDENT 
+-- On IS_GREATER reduce production expr -> IDENT 
+-- On IS_EQUAL reduce production expr -> IDENT 
+-- On IF reduce production expr -> IDENT 
+-- On IDENT reduce production expr -> IDENT 
+-- On EOL reduce production expr -> IDENT 
+-- On ELSE reduce production expr -> IDENT 
+-- On DOT reduce production expr -> IDENT 
+-- On DIV reduce production expr -> IDENT 
+-- On ATOM reduce production expr -> IDENT 
+-- On AND reduce production expr -> IDENT 
+
+State 13:
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> LPAREN expr . RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ TIMES RPAREN PLUS MINUS DOT DIV ]
+-- On TIMES shift to state 14
+-- On RPAREN shift to state 18
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+
+State 14:
+expr -> expr TIMES . expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 15
+
+State 15:
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr TIMES expr . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On DOT shift to state 16
+-- On WHILE reduce production expr -> expr TIMES expr 
+-- On VAR reduce production expr -> expr TIMES expr 
+-- On TIMES reduce production expr -> expr TIMES expr 
+-- On SKIP reduce production expr -> expr TIMES expr 
+-- On SEMICOLON reduce production expr -> expr TIMES expr 
+-- On RPAREN reduce production expr -> expr TIMES expr 
+-- On RBRACE reduce production expr -> expr TIMES expr 
+-- On PROC reduce production expr -> expr TIMES expr 
+-- On PLUS reduce production expr -> expr TIMES expr 
+-- On PARALLEL reduce production expr -> expr TIMES expr 
+-- On OR reduce production expr -> expr TIMES expr 
+-- On NUM reduce production expr -> expr TIMES expr 
+-- On NULL reduce production expr -> expr TIMES expr 
+-- On MINUS reduce production expr -> expr TIMES expr 
+-- On MALLOC reduce production expr -> expr TIMES expr 
+-- On LPAREN reduce production expr -> expr TIMES expr 
+-- On LBRACE reduce production expr -> expr TIMES expr 
+-- On IS_NOT_EQUAL reduce production expr -> expr TIMES expr 
+-- On IS_LESS_EQUAL reduce production expr -> expr TIMES expr 
+-- On IS_LESS reduce production expr -> expr TIMES expr 
+-- On IS_GREATER_EQUAL reduce production expr -> expr TIMES expr 
+-- On IS_GREATER reduce production expr -> expr TIMES expr 
+-- On IS_EQUAL reduce production expr -> expr TIMES expr 
+-- On IF reduce production expr -> expr TIMES expr 
+-- On IDENT reduce production expr -> expr TIMES expr 
+-- On EOL reduce production expr -> expr TIMES expr 
+-- On ELSE reduce production expr -> expr TIMES expr 
+-- On DOT reduce production expr -> expr TIMES expr 
+-- On DIV reduce production expr -> expr TIMES expr 
+-- On ATOM reduce production expr -> expr TIMES expr 
+-- On AND reduce production expr -> expr TIMES expr 
+** Conflict on DOT
+
+State 16:
+expr -> expr DOT . IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On IDENT shift to state 17
+
+State 17:
+expr -> expr DOT IDENT . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production expr -> expr DOT IDENT 
+-- On VAR reduce production expr -> expr DOT IDENT 
+-- On TIMES reduce production expr -> expr DOT IDENT 
+-- On SKIP reduce production expr -> expr DOT IDENT 
+-- On SEMICOLON reduce production expr -> expr DOT IDENT 
+-- On RPAREN reduce production expr -> expr DOT IDENT 
+-- On RBRACE reduce production expr -> expr DOT IDENT 
+-- On PROC reduce production expr -> expr DOT IDENT 
+-- On PLUS reduce production expr -> expr DOT IDENT 
+-- On PARALLEL reduce production expr -> expr DOT IDENT 
+-- On OR reduce production expr -> expr DOT IDENT 
+-- On NUM reduce production expr -> expr DOT IDENT 
+-- On NULL reduce production expr -> expr DOT IDENT 
+-- On MINUS reduce production expr -> expr DOT IDENT 
+-- On MALLOC reduce production expr -> expr DOT IDENT 
+-- On LPAREN reduce production expr -> expr DOT IDENT 
+-- On LBRACE reduce production expr -> expr DOT IDENT 
+-- On IS_NOT_EQUAL reduce production expr -> expr DOT IDENT 
+-- On IS_LESS_EQUAL reduce production expr -> expr DOT IDENT 
+-- On IS_LESS reduce production expr -> expr DOT IDENT 
+-- On IS_GREATER_EQUAL reduce production expr -> expr DOT IDENT 
+-- On IS_GREATER reduce production expr -> expr DOT IDENT 
+-- On IS_EQUAL reduce production expr -> expr DOT IDENT 
+-- On IF reduce production expr -> expr DOT IDENT 
+-- On IDENT reduce production expr -> expr DOT IDENT 
+-- On EOL reduce production expr -> expr DOT IDENT 
+-- On ELSE reduce production expr -> expr DOT IDENT 
+-- On DOT reduce production expr -> expr DOT IDENT 
+-- On DIV reduce production expr -> expr DOT IDENT 
+-- On ATOM reduce production expr -> expr DOT IDENT 
+-- On AND reduce production expr -> expr DOT IDENT 
+
+State 18:
+expr -> LPAREN expr RPAREN . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production expr -> LPAREN expr RPAREN 
+-- On VAR reduce production expr -> LPAREN expr RPAREN 
+-- On TIMES reduce production expr -> LPAREN expr RPAREN 
+-- On SKIP reduce production expr -> LPAREN expr RPAREN 
+-- On SEMICOLON reduce production expr -> LPAREN expr RPAREN 
+-- On RPAREN reduce production expr -> LPAREN expr RPAREN 
+-- On RBRACE reduce production expr -> LPAREN expr RPAREN 
+-- On PROC reduce production expr -> LPAREN expr RPAREN 
+-- On PLUS reduce production expr -> LPAREN expr RPAREN 
+-- On PARALLEL reduce production expr -> LPAREN expr RPAREN 
+-- On OR reduce production expr -> LPAREN expr RPAREN 
+-- On NUM reduce production expr -> LPAREN expr RPAREN 
+-- On NULL reduce production expr -> LPAREN expr RPAREN 
+-- On MINUS reduce production expr -> LPAREN expr RPAREN 
+-- On MALLOC reduce production expr -> LPAREN expr RPAREN 
+-- On LPAREN reduce production expr -> LPAREN expr RPAREN 
+-- On LBRACE reduce production expr -> LPAREN expr RPAREN 
+-- On IS_NOT_EQUAL reduce production expr -> LPAREN expr RPAREN 
+-- On IS_LESS_EQUAL reduce production expr -> LPAREN expr RPAREN 
+-- On IS_LESS reduce production expr -> LPAREN expr RPAREN 
+-- On IS_GREATER_EQUAL reduce production expr -> LPAREN expr RPAREN 
+-- On IS_GREATER reduce production expr -> LPAREN expr RPAREN 
+-- On IS_EQUAL reduce production expr -> LPAREN expr RPAREN 
+-- On IF reduce production expr -> LPAREN expr RPAREN 
+-- On IDENT reduce production expr -> LPAREN expr RPAREN 
+-- On EOL reduce production expr -> LPAREN expr RPAREN 
+-- On ELSE reduce production expr -> LPAREN expr RPAREN 
+-- On DOT reduce production expr -> LPAREN expr RPAREN 
+-- On DIV reduce production expr -> LPAREN expr RPAREN 
+-- On ATOM reduce production expr -> LPAREN expr RPAREN 
+-- On AND reduce production expr -> LPAREN expr RPAREN 
+
+State 19:
+expr -> expr PLUS . expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 20
+
+State 20:
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr PLUS expr . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production expr -> expr PLUS expr 
+-- On VAR reduce production expr -> expr PLUS expr 
+-- On SKIP reduce production expr -> expr PLUS expr 
+-- On SEMICOLON reduce production expr -> expr PLUS expr 
+-- On RPAREN reduce production expr -> expr PLUS expr 
+-- On RBRACE reduce production expr -> expr PLUS expr 
+-- On PROC reduce production expr -> expr PLUS expr 
+-- On PLUS reduce production expr -> expr PLUS expr 
+-- On PARALLEL reduce production expr -> expr PLUS expr 
+-- On OR reduce production expr -> expr PLUS expr 
+-- On NUM reduce production expr -> expr PLUS expr 
+-- On NULL reduce production expr -> expr PLUS expr 
+-- On MINUS reduce production expr -> expr PLUS expr 
+-- On MALLOC reduce production expr -> expr PLUS expr 
+-- On LPAREN reduce production expr -> expr PLUS expr 
+-- On LBRACE reduce production expr -> expr PLUS expr 
+-- On IS_NOT_EQUAL reduce production expr -> expr PLUS expr 
+-- On IS_LESS_EQUAL reduce production expr -> expr PLUS expr 
+-- On IS_LESS reduce production expr -> expr PLUS expr 
+-- On IS_GREATER_EQUAL reduce production expr -> expr PLUS expr 
+-- On IS_GREATER reduce production expr -> expr PLUS expr 
+-- On IS_EQUAL reduce production expr -> expr PLUS expr 
+-- On IF reduce production expr -> expr PLUS expr 
+-- On IDENT reduce production expr -> expr PLUS expr 
+-- On EOL reduce production expr -> expr PLUS expr 
+-- On ELSE reduce production expr -> expr PLUS expr 
+-- On DOT reduce production expr -> expr PLUS expr 
+-- On ATOM reduce production expr -> expr PLUS expr 
+-- On AND reduce production expr -> expr PLUS expr 
+** Conflict on DOT
+
+State 21:
+expr -> expr DIV . expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 22
+
+State 22:
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr DIV expr . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On DOT shift to state 16
+-- On WHILE reduce production expr -> expr DIV expr 
+-- On VAR reduce production expr -> expr DIV expr 
+-- On TIMES reduce production expr -> expr DIV expr 
+-- On SKIP reduce production expr -> expr DIV expr 
+-- On SEMICOLON reduce production expr -> expr DIV expr 
+-- On RPAREN reduce production expr -> expr DIV expr 
+-- On RBRACE reduce production expr -> expr DIV expr 
+-- On PROC reduce production expr -> expr DIV expr 
+-- On PLUS reduce production expr -> expr DIV expr 
+-- On PARALLEL reduce production expr -> expr DIV expr 
+-- On OR reduce production expr -> expr DIV expr 
+-- On NUM reduce production expr -> expr DIV expr 
+-- On NULL reduce production expr -> expr DIV expr 
+-- On MINUS reduce production expr -> expr DIV expr 
+-- On MALLOC reduce production expr -> expr DIV expr 
+-- On LPAREN reduce production expr -> expr DIV expr 
+-- On LBRACE reduce production expr -> expr DIV expr 
+-- On IS_NOT_EQUAL reduce production expr -> expr DIV expr 
+-- On IS_LESS_EQUAL reduce production expr -> expr DIV expr 
+-- On IS_LESS reduce production expr -> expr DIV expr 
+-- On IS_GREATER_EQUAL reduce production expr -> expr DIV expr 
+-- On IS_GREATER reduce production expr -> expr DIV expr 
+-- On IS_EQUAL reduce production expr -> expr DIV expr 
+-- On IF reduce production expr -> expr DIV expr 
+-- On IDENT reduce production expr -> expr DIV expr 
+-- On EOL reduce production expr -> expr DIV expr 
+-- On ELSE reduce production expr -> expr DIV expr 
+-- On DOT reduce production expr -> expr DIV expr 
+-- On DIV reduce production expr -> expr DIV expr 
+-- On ATOM reduce production expr -> expr DIV expr 
+-- On AND reduce production expr -> expr DIV expr 
+** Conflict on DOT
+
+State 23:
+expr -> expr MINUS . expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 24
+
+State 24:
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr MINUS expr . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production expr -> expr MINUS expr 
+-- On VAR reduce production expr -> expr MINUS expr 
+-- On SKIP reduce production expr -> expr MINUS expr 
+-- On SEMICOLON reduce production expr -> expr MINUS expr 
+-- On RPAREN reduce production expr -> expr MINUS expr 
+-- On RBRACE reduce production expr -> expr MINUS expr 
+-- On PROC reduce production expr -> expr MINUS expr 
+-- On PLUS reduce production expr -> expr MINUS expr 
+-- On PARALLEL reduce production expr -> expr MINUS expr 
+-- On OR reduce production expr -> expr MINUS expr 
+-- On NUM reduce production expr -> expr MINUS expr 
+-- On NULL reduce production expr -> expr MINUS expr 
+-- On MINUS reduce production expr -> expr MINUS expr 
+-- On MALLOC reduce production expr -> expr MINUS expr 
+-- On LPAREN reduce production expr -> expr MINUS expr 
+-- On LBRACE reduce production expr -> expr MINUS expr 
+-- On IS_NOT_EQUAL reduce production expr -> expr MINUS expr 
+-- On IS_LESS_EQUAL reduce production expr -> expr MINUS expr 
+-- On IS_LESS reduce production expr -> expr MINUS expr 
+-- On IS_GREATER_EQUAL reduce production expr -> expr MINUS expr 
+-- On IS_GREATER reduce production expr -> expr MINUS expr 
+-- On IS_EQUAL reduce production expr -> expr MINUS expr 
+-- On IF reduce production expr -> expr MINUS expr 
+-- On IDENT reduce production expr -> expr MINUS expr 
+-- On EOL reduce production expr -> expr MINUS expr 
+-- On ELSE reduce production expr -> expr MINUS expr 
+-- On DOT reduce production expr -> expr MINUS expr 
+-- On ATOM reduce production expr -> expr MINUS expr 
+-- On AND reduce production expr -> expr MINUS expr 
+** Conflict on DOT
+
+State 25:
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> MINUS expr . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On DOT shift to state 16
+-- On WHILE reduce production expr -> MINUS expr 
+-- On VAR reduce production expr -> MINUS expr 
+-- On TIMES reduce production expr -> MINUS expr 
+-- On SKIP reduce production expr -> MINUS expr 
+-- On SEMICOLON reduce production expr -> MINUS expr 
+-- On RPAREN reduce production expr -> MINUS expr 
+-- On RBRACE reduce production expr -> MINUS expr 
+-- On PROC reduce production expr -> MINUS expr 
+-- On PLUS reduce production expr -> MINUS expr 
+-- On PARALLEL reduce production expr -> MINUS expr 
+-- On OR reduce production expr -> MINUS expr 
+-- On NUM reduce production expr -> MINUS expr 
+-- On NULL reduce production expr -> MINUS expr 
+-- On MINUS reduce production expr -> MINUS expr 
+-- On MALLOC reduce production expr -> MINUS expr 
+-- On LPAREN reduce production expr -> MINUS expr 
+-- On LBRACE reduce production expr -> MINUS expr 
+-- On IS_NOT_EQUAL reduce production expr -> MINUS expr 
+-- On IS_LESS_EQUAL reduce production expr -> MINUS expr 
+-- On IS_LESS reduce production expr -> MINUS expr 
+-- On IS_GREATER_EQUAL reduce production expr -> MINUS expr 
+-- On IS_GREATER reduce production expr -> MINUS expr 
+-- On IS_EQUAL reduce production expr -> MINUS expr 
+-- On IF reduce production expr -> MINUS expr 
+-- On IDENT reduce production expr -> MINUS expr 
+-- On EOL reduce production expr -> MINUS expr 
+-- On ELSE reduce production expr -> MINUS expr 
+-- On DOT reduce production expr -> MINUS expr 
+-- On DIV reduce production expr -> MINUS expr 
+-- On ATOM reduce production expr -> MINUS expr 
+-- On AND reduce production expr -> MINUS expr 
+** Conflict on DOT
+
+State 26:
+cmd -> MALLOC . LPAREN IDENT RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On LPAREN shift to state 27
+
+State 27:
+cmd -> MALLOC LPAREN . IDENT RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On IDENT shift to state 28
+
+State 28:
+cmd -> MALLOC LPAREN IDENT . RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On RPAREN shift to state 29
+
+State 29:
+cmd -> MALLOC LPAREN IDENT RPAREN . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On VAR reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On TIMES reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On SKIP reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On SEMICOLON reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On RPAREN reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On RBRACE reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On PROC reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On PLUS reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On PARALLEL reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On OR reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On NUM reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On NULL reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On MINUS reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On MALLOC reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On LPAREN reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On LBRACE reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IS_NOT_EQUAL reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IS_LESS_EQUAL reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IS_LESS reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IS_GREATER_EQUAL reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IS_GREATER reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IS_EQUAL reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IF reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On IDENT reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On EOL reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On ELSE reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On DOT reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On DIV reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On ATOM reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+-- On AND reduce production cmd -> MALLOC LPAREN IDENT RPAREN 
+
+State 30:
+cmd -> LBRACE . cmds RBRACE [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+cmd -> LBRACE . cmd PARALLEL cmd RBRACE [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On expr shift to state 66
+-- On cmds shift to state 75
+-- On cmd shift to state 77
+-- On RBRACE reduce production cmds -> 
+
+State 31:
+cmd -> IF . bool_expr cmd ELSE cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On NOT shift to state 32
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 33
+-- On IDENT shift to state 12
+-- On BOOL shift to state 34
+-- On expr shift to state 51
+-- On bool_expr shift to state 56
+
+State 32:
+bool_expr -> NOT . bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On NOT shift to state 32
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 33
+-- On IDENT shift to state 12
+-- On BOOL shift to state 34
+-- On expr shift to state 51
+-- On bool_expr shift to state 55
+
+State 33:
+bool_expr -> LPAREN . bool_expr RPAREN [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> LPAREN . expr RPAREN [ TIMES RPAREN PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On NOT shift to state 32
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 33
+-- On IDENT shift to state 12
+-- On BOOL shift to state 34
+-- On expr shift to state 35
+-- On bool_expr shift to state 48
+
+State 34:
+bool_expr -> BOOL . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On WHILE reduce production bool_expr -> BOOL 
+-- On VAR reduce production bool_expr -> BOOL 
+-- On SKIP reduce production bool_expr -> BOOL 
+-- On RPAREN reduce production bool_expr -> BOOL 
+-- On PROC reduce production bool_expr -> BOOL 
+-- On OR reduce production bool_expr -> BOOL 
+-- On NUM reduce production bool_expr -> BOOL 
+-- On NULL reduce production bool_expr -> BOOL 
+-- On MINUS reduce production bool_expr -> BOOL 
+-- On MALLOC reduce production bool_expr -> BOOL 
+-- On LPAREN reduce production bool_expr -> BOOL 
+-- On LBRACE reduce production bool_expr -> BOOL 
+-- On IF reduce production bool_expr -> BOOL 
+-- On IDENT reduce production bool_expr -> BOOL 
+-- On ATOM reduce production bool_expr -> BOOL 
+-- On AND reduce production bool_expr -> BOOL 
+
+State 35:
+bool_expr -> expr . IS_EQUAL expr [ RPAREN OR AND ]
+bool_expr -> expr . IS_NOT_EQUAL expr [ RPAREN OR AND ]
+bool_expr -> expr . IS_LESS expr [ RPAREN OR AND ]
+bool_expr -> expr . IS_LESS_EQUAL expr [ RPAREN OR AND ]
+bool_expr -> expr . IS_GREATER expr [ RPAREN OR AND ]
+bool_expr -> expr . IS_GREATER_EQUAL expr [ RPAREN OR AND ]
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> LPAREN expr . RPAREN [ TIMES RPAREN PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . DOT IDENT [ TIMES RPAREN PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+-- On TIMES shift to state 14
+-- On RPAREN shift to state 18
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On IS_NOT_EQUAL shift to state 36
+-- On IS_LESS_EQUAL shift to state 38
+-- On IS_LESS shift to state 40
+-- On IS_GREATER_EQUAL shift to state 42
+-- On IS_GREATER shift to state 44
+-- On IS_EQUAL shift to state 46
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+
+State 36:
+bool_expr -> expr IS_NOT_EQUAL . expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 37
+
+State 37:
+bool_expr -> expr IS_NOT_EQUAL expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On VAR reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On SKIP reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On RPAREN reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On PROC reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On OR reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On NUM reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On NULL reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On MALLOC reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On LPAREN reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On LBRACE reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On IF reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On IDENT reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On ATOM reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+-- On AND reduce production bool_expr -> expr IS_NOT_EQUAL expr 
+
+State 38:
+bool_expr -> expr IS_LESS_EQUAL . expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 39
+
+State 39:
+bool_expr -> expr IS_LESS_EQUAL expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On VAR reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On SKIP reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On RPAREN reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On PROC reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On OR reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On NUM reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On NULL reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On MALLOC reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On LPAREN reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On LBRACE reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On IF reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On IDENT reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On ATOM reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+-- On AND reduce production bool_expr -> expr IS_LESS_EQUAL expr 
+
+State 40:
+bool_expr -> expr IS_LESS . expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 41
+
+State 41:
+bool_expr -> expr IS_LESS expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production bool_expr -> expr IS_LESS expr 
+-- On VAR reduce production bool_expr -> expr IS_LESS expr 
+-- On SKIP reduce production bool_expr -> expr IS_LESS expr 
+-- On RPAREN reduce production bool_expr -> expr IS_LESS expr 
+-- On PROC reduce production bool_expr -> expr IS_LESS expr 
+-- On OR reduce production bool_expr -> expr IS_LESS expr 
+-- On NUM reduce production bool_expr -> expr IS_LESS expr 
+-- On NULL reduce production bool_expr -> expr IS_LESS expr 
+-- On MALLOC reduce production bool_expr -> expr IS_LESS expr 
+-- On LPAREN reduce production bool_expr -> expr IS_LESS expr 
+-- On LBRACE reduce production bool_expr -> expr IS_LESS expr 
+-- On IF reduce production bool_expr -> expr IS_LESS expr 
+-- On IDENT reduce production bool_expr -> expr IS_LESS expr 
+-- On ATOM reduce production bool_expr -> expr IS_LESS expr 
+-- On AND reduce production bool_expr -> expr IS_LESS expr 
+
+State 42:
+bool_expr -> expr IS_GREATER_EQUAL . expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 43
+
+State 43:
+bool_expr -> expr IS_GREATER_EQUAL expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On VAR reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On SKIP reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On RPAREN reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On PROC reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On OR reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On NUM reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On NULL reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On MALLOC reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On LPAREN reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On LBRACE reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On IF reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On IDENT reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On ATOM reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+-- On AND reduce production bool_expr -> expr IS_GREATER_EQUAL expr 
+
+State 44:
+bool_expr -> expr IS_GREATER . expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 45
+
+State 45:
+bool_expr -> expr IS_GREATER expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production bool_expr -> expr IS_GREATER expr 
+-- On VAR reduce production bool_expr -> expr IS_GREATER expr 
+-- On SKIP reduce production bool_expr -> expr IS_GREATER expr 
+-- On RPAREN reduce production bool_expr -> expr IS_GREATER expr 
+-- On PROC reduce production bool_expr -> expr IS_GREATER expr 
+-- On OR reduce production bool_expr -> expr IS_GREATER expr 
+-- On NUM reduce production bool_expr -> expr IS_GREATER expr 
+-- On NULL reduce production bool_expr -> expr IS_GREATER expr 
+-- On MALLOC reduce production bool_expr -> expr IS_GREATER expr 
+-- On LPAREN reduce production bool_expr -> expr IS_GREATER expr 
+-- On LBRACE reduce production bool_expr -> expr IS_GREATER expr 
+-- On IF reduce production bool_expr -> expr IS_GREATER expr 
+-- On IDENT reduce production bool_expr -> expr IS_GREATER expr 
+-- On ATOM reduce production bool_expr -> expr IS_GREATER expr 
+-- On AND reduce production bool_expr -> expr IS_GREATER expr 
+
+State 46:
+bool_expr -> expr IS_EQUAL . expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 47
+
+State 47:
+bool_expr -> expr IS_EQUAL expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP RPAREN PROC PLUS OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production bool_expr -> expr IS_EQUAL expr 
+-- On VAR reduce production bool_expr -> expr IS_EQUAL expr 
+-- On SKIP reduce production bool_expr -> expr IS_EQUAL expr 
+-- On RPAREN reduce production bool_expr -> expr IS_EQUAL expr 
+-- On PROC reduce production bool_expr -> expr IS_EQUAL expr 
+-- On OR reduce production bool_expr -> expr IS_EQUAL expr 
+-- On NUM reduce production bool_expr -> expr IS_EQUAL expr 
+-- On NULL reduce production bool_expr -> expr IS_EQUAL expr 
+-- On MALLOC reduce production bool_expr -> expr IS_EQUAL expr 
+-- On LPAREN reduce production bool_expr -> expr IS_EQUAL expr 
+-- On LBRACE reduce production bool_expr -> expr IS_EQUAL expr 
+-- On IF reduce production bool_expr -> expr IS_EQUAL expr 
+-- On IDENT reduce production bool_expr -> expr IS_EQUAL expr 
+-- On ATOM reduce production bool_expr -> expr IS_EQUAL expr 
+-- On AND reduce production bool_expr -> expr IS_EQUAL expr 
+
+State 48:
+bool_expr -> LPAREN bool_expr . RPAREN [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr . AND bool_expr [ RPAREN OR AND ]
+bool_expr -> bool_expr . OR bool_expr [ RPAREN OR AND ]
+-- On RPAREN shift to state 49
+-- On OR shift to state 50
+-- On AND shift to state 53
+
+State 49:
+bool_expr -> LPAREN bool_expr RPAREN . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On WHILE reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On VAR reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On SKIP reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On RPAREN reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On PROC reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On OR reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On NUM reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On NULL reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On MINUS reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On MALLOC reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On LPAREN reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On LBRACE reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On IF reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On IDENT reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On ATOM reduce production bool_expr -> LPAREN bool_expr RPAREN 
+-- On AND reduce production bool_expr -> LPAREN bool_expr RPAREN 
+
+State 50:
+bool_expr -> bool_expr OR . bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On NOT shift to state 32
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 33
+-- On IDENT shift to state 12
+-- On BOOL shift to state 34
+-- On expr shift to state 51
+-- On bool_expr shift to state 52
+
+State 51:
+bool_expr -> expr . IS_EQUAL expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> expr . IS_NOT_EQUAL expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> expr . IS_LESS expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> expr . IS_LESS_EQUAL expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> expr . IS_GREATER expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> expr . IS_GREATER_EQUAL expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+expr -> expr . PLUS expr [ TIMES PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . MINUS expr [ TIMES PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . TIMES expr [ TIMES PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . DIV expr [ TIMES PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+expr -> expr . DOT IDENT [ TIMES PLUS MINUS IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL DOT DIV ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On IS_NOT_EQUAL shift to state 36
+-- On IS_LESS_EQUAL shift to state 38
+-- On IS_LESS shift to state 40
+-- On IS_GREATER_EQUAL shift to state 42
+-- On IS_GREATER shift to state 44
+-- On IS_EQUAL shift to state 46
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+
+State 52:
+bool_expr -> bool_expr . AND bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr . OR bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr OR bool_expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On AND shift to state 53
+-- On WHILE reduce production bool_expr -> bool_expr OR bool_expr 
+-- On VAR reduce production bool_expr -> bool_expr OR bool_expr 
+-- On SKIP reduce production bool_expr -> bool_expr OR bool_expr 
+-- On RPAREN reduce production bool_expr -> bool_expr OR bool_expr 
+-- On PROC reduce production bool_expr -> bool_expr OR bool_expr 
+-- On OR reduce production bool_expr -> bool_expr OR bool_expr 
+-- On NUM reduce production bool_expr -> bool_expr OR bool_expr 
+-- On NULL reduce production bool_expr -> bool_expr OR bool_expr 
+-- On MINUS reduce production bool_expr -> bool_expr OR bool_expr 
+-- On MALLOC reduce production bool_expr -> bool_expr OR bool_expr 
+-- On LPAREN reduce production bool_expr -> bool_expr OR bool_expr 
+-- On LBRACE reduce production bool_expr -> bool_expr OR bool_expr 
+-- On IF reduce production bool_expr -> bool_expr OR bool_expr 
+-- On IDENT reduce production bool_expr -> bool_expr OR bool_expr 
+-- On ATOM reduce production bool_expr -> bool_expr OR bool_expr 
+
+State 53:
+bool_expr -> bool_expr AND . bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On NOT shift to state 32
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 33
+-- On IDENT shift to state 12
+-- On BOOL shift to state 34
+-- On expr shift to state 51
+-- On bool_expr shift to state 54
+
+State 54:
+bool_expr -> bool_expr . AND bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr AND bool_expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr . OR bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On WHILE reduce production bool_expr -> bool_expr AND bool_expr 
+-- On VAR reduce production bool_expr -> bool_expr AND bool_expr 
+-- On SKIP reduce production bool_expr -> bool_expr AND bool_expr 
+-- On RPAREN reduce production bool_expr -> bool_expr AND bool_expr 
+-- On PROC reduce production bool_expr -> bool_expr AND bool_expr 
+-- On OR reduce production bool_expr -> bool_expr AND bool_expr 
+-- On NUM reduce production bool_expr -> bool_expr AND bool_expr 
+-- On NULL reduce production bool_expr -> bool_expr AND bool_expr 
+-- On MINUS reduce production bool_expr -> bool_expr AND bool_expr 
+-- On MALLOC reduce production bool_expr -> bool_expr AND bool_expr 
+-- On LPAREN reduce production bool_expr -> bool_expr AND bool_expr 
+-- On LBRACE reduce production bool_expr -> bool_expr AND bool_expr 
+-- On IF reduce production bool_expr -> bool_expr AND bool_expr 
+-- On IDENT reduce production bool_expr -> bool_expr AND bool_expr 
+-- On ATOM reduce production bool_expr -> bool_expr AND bool_expr 
+-- On AND reduce production bool_expr -> bool_expr AND bool_expr 
+
+State 55:
+bool_expr -> NOT bool_expr . [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr . AND bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr . OR bool_expr [ WHILE VAR SKIP RPAREN PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+-- On WHILE reduce production bool_expr -> NOT bool_expr 
+-- On VAR reduce production bool_expr -> NOT bool_expr 
+-- On SKIP reduce production bool_expr -> NOT bool_expr 
+-- On RPAREN reduce production bool_expr -> NOT bool_expr 
+-- On PROC reduce production bool_expr -> NOT bool_expr 
+-- On OR reduce production bool_expr -> NOT bool_expr 
+-- On NUM reduce production bool_expr -> NOT bool_expr 
+-- On NULL reduce production bool_expr -> NOT bool_expr 
+-- On MINUS reduce production bool_expr -> NOT bool_expr 
+-- On MALLOC reduce production bool_expr -> NOT bool_expr 
+-- On LPAREN reduce production bool_expr -> NOT bool_expr 
+-- On LBRACE reduce production bool_expr -> NOT bool_expr 
+-- On IF reduce production bool_expr -> NOT bool_expr 
+-- On IDENT reduce production bool_expr -> NOT bool_expr 
+-- On ATOM reduce production bool_expr -> NOT bool_expr 
+-- On AND reduce production bool_expr -> NOT bool_expr 
+
+State 56:
+bool_expr -> bool_expr . AND bool_expr [ WHILE VAR SKIP PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr . OR bool_expr [ WHILE VAR SKIP PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+cmd -> IF bool_expr . cmd ELSE cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On OR shift to state 50
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On AND shift to state 53
+-- On expr shift to state 66
+-- On cmd shift to state 72
+
+State 57:
+cmd -> IDENT . ASSIGN expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+cmd -> IDENT . DOT IDENT ASSIGN expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> IDENT . [ TIMES PLUS MINUS LPAREN DOT DIV ]
+-- On DOT shift to state 58
+-- On ASSIGN shift to state 62
+-- On TIMES reduce production expr -> IDENT 
+-- On PLUS reduce production expr -> IDENT 
+-- On MINUS reduce production expr -> IDENT 
+-- On LPAREN reduce production expr -> IDENT 
+-- On DOT reduce production expr -> IDENT 
+-- On DIV reduce production expr -> IDENT 
+** Conflict on DOT
+
+State 58:
+cmd -> IDENT DOT . IDENT ASSIGN expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On IDENT shift to state 59
+
+State 59:
+cmd -> IDENT DOT IDENT . ASSIGN expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On ASSIGN shift to state 60
+
+State 60:
+cmd -> IDENT DOT IDENT ASSIGN . expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 61
+
+State 61:
+cmd -> IDENT DOT IDENT ASSIGN expr . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On VAR reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On TIMES reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On SKIP reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On SEMICOLON reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On RPAREN reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On RBRACE reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On PROC reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On PLUS reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On PARALLEL reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On OR reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On NUM reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On NULL reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On MINUS reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On MALLOC reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On LPAREN reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On LBRACE reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IS_NOT_EQUAL reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IS_LESS_EQUAL reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IS_LESS reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IS_GREATER_EQUAL reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IS_GREATER reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IS_EQUAL reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IF reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On IDENT reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On EOL reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On ELSE reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On DOT reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On DIV reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On ATOM reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+-- On AND reduce production cmd -> IDENT DOT IDENT ASSIGN expr 
+** Conflict on TIMES PLUS MINUS DOT DIV
+
+State 62:
+cmd -> IDENT ASSIGN . expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 63
+
+State 63:
+cmd -> IDENT ASSIGN expr . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . PLUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . MINUS expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . TIMES expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DIV expr [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . DOT IDENT [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+-- On WHILE reduce production cmd -> IDENT ASSIGN expr 
+-- On VAR reduce production cmd -> IDENT ASSIGN expr 
+-- On TIMES reduce production cmd -> IDENT ASSIGN expr 
+-- On SKIP reduce production cmd -> IDENT ASSIGN expr 
+-- On SEMICOLON reduce production cmd -> IDENT ASSIGN expr 
+-- On RPAREN reduce production cmd -> IDENT ASSIGN expr 
+-- On RBRACE reduce production cmd -> IDENT ASSIGN expr 
+-- On PROC reduce production cmd -> IDENT ASSIGN expr 
+-- On PLUS reduce production cmd -> IDENT ASSIGN expr 
+-- On PARALLEL reduce production cmd -> IDENT ASSIGN expr 
+-- On OR reduce production cmd -> IDENT ASSIGN expr 
+-- On NUM reduce production cmd -> IDENT ASSIGN expr 
+-- On NULL reduce production cmd -> IDENT ASSIGN expr 
+-- On MINUS reduce production cmd -> IDENT ASSIGN expr 
+-- On MALLOC reduce production cmd -> IDENT ASSIGN expr 
+-- On LPAREN reduce production cmd -> IDENT ASSIGN expr 
+-- On LBRACE reduce production cmd -> IDENT ASSIGN expr 
+-- On IS_NOT_EQUAL reduce production cmd -> IDENT ASSIGN expr 
+-- On IS_LESS_EQUAL reduce production cmd -> IDENT ASSIGN expr 
+-- On IS_LESS reduce production cmd -> IDENT ASSIGN expr 
+-- On IS_GREATER_EQUAL reduce production cmd -> IDENT ASSIGN expr 
+-- On IS_GREATER reduce production cmd -> IDENT ASSIGN expr 
+-- On IS_EQUAL reduce production cmd -> IDENT ASSIGN expr 
+-- On IF reduce production cmd -> IDENT ASSIGN expr 
+-- On IDENT reduce production cmd -> IDENT ASSIGN expr 
+-- On EOL reduce production cmd -> IDENT ASSIGN expr 
+-- On ELSE reduce production cmd -> IDENT ASSIGN expr 
+-- On DOT reduce production cmd -> IDENT ASSIGN expr 
+-- On DIV reduce production cmd -> IDENT ASSIGN expr 
+-- On ATOM reduce production cmd -> IDENT ASSIGN expr 
+-- On AND reduce production cmd -> IDENT ASSIGN expr 
+** Conflict on TIMES PLUS MINUS DOT DIV
+
+State 64:
+cmd -> ATOM . LPAREN cmd RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On LPAREN shift to state 65
+
+State 65:
+cmd -> ATOM LPAREN . cmd RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On expr shift to state 66
+-- On cmd shift to state 70
+
+State 66:
+cmd -> expr . LPAREN expr RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . PLUS expr [ TIMES PLUS MINUS LPAREN DOT DIV ]
+expr -> expr . MINUS expr [ TIMES PLUS MINUS LPAREN DOT DIV ]
+expr -> expr . TIMES expr [ TIMES PLUS MINUS LPAREN DOT DIV ]
+expr -> expr . DIV expr [ TIMES PLUS MINUS LPAREN DOT DIV ]
+expr -> expr . DOT IDENT [ TIMES PLUS MINUS LPAREN DOT DIV ]
+-- On TIMES shift to state 14
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On LPAREN shift to state 67
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+
+State 67:
+cmd -> expr LPAREN . expr RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On LPAREN shift to state 11
+-- On IDENT shift to state 12
+-- On expr shift to state 68
+
+State 68:
+cmd -> expr LPAREN expr . RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS MINUS DOT DIV ]
+expr -> expr . DOT IDENT [ TIMES RPAREN PLUS MINUS DOT DIV ]
+-- On TIMES shift to state 14
+-- On RPAREN shift to state 69
+-- On PLUS shift to state 19
+-- On MINUS shift to state 23
+-- On DOT shift to state 16
+-- On DIV shift to state 21
+
+State 69:
+cmd -> expr LPAREN expr RPAREN . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> expr LPAREN expr RPAREN 
+-- On VAR reduce production cmd -> expr LPAREN expr RPAREN 
+-- On TIMES reduce production cmd -> expr LPAREN expr RPAREN 
+-- On SKIP reduce production cmd -> expr LPAREN expr RPAREN 
+-- On SEMICOLON reduce production cmd -> expr LPAREN expr RPAREN 
+-- On RPAREN reduce production cmd -> expr LPAREN expr RPAREN 
+-- On RBRACE reduce production cmd -> expr LPAREN expr RPAREN 
+-- On PROC reduce production cmd -> expr LPAREN expr RPAREN 
+-- On PLUS reduce production cmd -> expr LPAREN expr RPAREN 
+-- On PARALLEL reduce production cmd -> expr LPAREN expr RPAREN 
+-- On OR reduce production cmd -> expr LPAREN expr RPAREN 
+-- On NUM reduce production cmd -> expr LPAREN expr RPAREN 
+-- On NULL reduce production cmd -> expr LPAREN expr RPAREN 
+-- On MINUS reduce production cmd -> expr LPAREN expr RPAREN 
+-- On MALLOC reduce production cmd -> expr LPAREN expr RPAREN 
+-- On LPAREN reduce production cmd -> expr LPAREN expr RPAREN 
+-- On LBRACE reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IS_NOT_EQUAL reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IS_LESS_EQUAL reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IS_LESS reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IS_GREATER_EQUAL reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IS_GREATER reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IS_EQUAL reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IF reduce production cmd -> expr LPAREN expr RPAREN 
+-- On IDENT reduce production cmd -> expr LPAREN expr RPAREN 
+-- On EOL reduce production cmd -> expr LPAREN expr RPAREN 
+-- On ELSE reduce production cmd -> expr LPAREN expr RPAREN 
+-- On DOT reduce production cmd -> expr LPAREN expr RPAREN 
+-- On DIV reduce production cmd -> expr LPAREN expr RPAREN 
+-- On ATOM reduce production cmd -> expr LPAREN expr RPAREN 
+-- On AND reduce production cmd -> expr LPAREN expr RPAREN 
+
+State 70:
+cmd -> ATOM LPAREN cmd . RPAREN [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On RPAREN shift to state 71
+
+State 71:
+cmd -> ATOM LPAREN cmd RPAREN . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On VAR reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On TIMES reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On SKIP reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On SEMICOLON reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On RPAREN reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On RBRACE reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On PROC reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On PLUS reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On PARALLEL reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On OR reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On NUM reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On NULL reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On MINUS reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On MALLOC reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On LPAREN reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On LBRACE reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IS_NOT_EQUAL reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IS_LESS_EQUAL reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IS_LESS reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IS_GREATER_EQUAL reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IS_GREATER reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IS_EQUAL reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IF reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On IDENT reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On EOL reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On ELSE reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On DOT reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On DIV reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On ATOM reduce production cmd -> ATOM LPAREN cmd RPAREN 
+-- On AND reduce production cmd -> ATOM LPAREN cmd RPAREN 
+
+State 72:
+cmd -> IF bool_expr cmd . ELSE cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On ELSE shift to state 73
+
+State 73:
+cmd -> IF bool_expr cmd ELSE . cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On expr shift to state 66
+-- On cmd shift to state 74
+
+State 74:
+cmd -> IF bool_expr cmd ELSE cmd . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On VAR reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On TIMES reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On SKIP reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On SEMICOLON reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On RPAREN reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On RBRACE reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On PROC reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On PLUS reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On PARALLEL reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On OR reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On NUM reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On NULL reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On MINUS reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On MALLOC reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On LPAREN reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On LBRACE reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IS_NOT_EQUAL reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IS_LESS_EQUAL reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IS_LESS reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IS_GREATER_EQUAL reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IS_GREATER reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IS_EQUAL reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IF reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On IDENT reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On EOL reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On ELSE reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On DOT reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On DIV reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On ATOM reduce production cmd -> IF bool_expr cmd ELSE cmd 
+-- On AND reduce production cmd -> IF bool_expr cmd ELSE cmd 
+
+State 75:
+cmd -> LBRACE cmds . RBRACE [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On RBRACE shift to state 76
+
+State 76:
+cmd -> LBRACE cmds RBRACE . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> LBRACE cmds RBRACE 
+-- On VAR reduce production cmd -> LBRACE cmds RBRACE 
+-- On TIMES reduce production cmd -> LBRACE cmds RBRACE 
+-- On SKIP reduce production cmd -> LBRACE cmds RBRACE 
+-- On SEMICOLON reduce production cmd -> LBRACE cmds RBRACE 
+-- On RPAREN reduce production cmd -> LBRACE cmds RBRACE 
+-- On RBRACE reduce production cmd -> LBRACE cmds RBRACE 
+-- On PROC reduce production cmd -> LBRACE cmds RBRACE 
+-- On PLUS reduce production cmd -> LBRACE cmds RBRACE 
+-- On PARALLEL reduce production cmd -> LBRACE cmds RBRACE 
+-- On OR reduce production cmd -> LBRACE cmds RBRACE 
+-- On NUM reduce production cmd -> LBRACE cmds RBRACE 
+-- On NULL reduce production cmd -> LBRACE cmds RBRACE 
+-- On MINUS reduce production cmd -> LBRACE cmds RBRACE 
+-- On MALLOC reduce production cmd -> LBRACE cmds RBRACE 
+-- On LPAREN reduce production cmd -> LBRACE cmds RBRACE 
+-- On LBRACE reduce production cmd -> LBRACE cmds RBRACE 
+-- On IS_NOT_EQUAL reduce production cmd -> LBRACE cmds RBRACE 
+-- On IS_LESS_EQUAL reduce production cmd -> LBRACE cmds RBRACE 
+-- On IS_LESS reduce production cmd -> LBRACE cmds RBRACE 
+-- On IS_GREATER_EQUAL reduce production cmd -> LBRACE cmds RBRACE 
+-- On IS_GREATER reduce production cmd -> LBRACE cmds RBRACE 
+-- On IS_EQUAL reduce production cmd -> LBRACE cmds RBRACE 
+-- On IF reduce production cmd -> LBRACE cmds RBRACE 
+-- On IDENT reduce production cmd -> LBRACE cmds RBRACE 
+-- On EOL reduce production cmd -> LBRACE cmds RBRACE 
+-- On ELSE reduce production cmd -> LBRACE cmds RBRACE 
+-- On DOT reduce production cmd -> LBRACE cmds RBRACE 
+-- On DIV reduce production cmd -> LBRACE cmds RBRACE 
+-- On ATOM reduce production cmd -> LBRACE cmds RBRACE 
+-- On AND reduce production cmd -> LBRACE cmds RBRACE 
+
+State 77:
+cmd -> LBRACE cmd . PARALLEL cmd RBRACE [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+cmds -> cmd . SEMICOLON cmds [ RBRACE ]
+cmds -> cmd . SEMICOLON [ RBRACE ]
+cmds -> cmd . [ RBRACE ]
+-- On SEMICOLON shift to state 78
+-- On PARALLEL shift to state 81
+-- On RBRACE reduce production cmds -> cmd 
+
+State 78:
+cmds -> cmd SEMICOLON . cmds [ RBRACE EOL ]
+cmds -> cmd SEMICOLON . [ RBRACE EOL ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On expr shift to state 66
+-- On cmds shift to state 79
+-- On cmd shift to state 80
+-- On RBRACE reduce production cmds -> cmd SEMICOLON 
+-- On RBRACE reduce production cmds -> 
+-- On EOL reduce production cmds -> cmd SEMICOLON 
+-- On EOL reduce production cmds -> 
+** Conflict on RBRACE EOL
+
+State 79:
+cmds -> cmd SEMICOLON cmds . [ RBRACE EOL ]
+-- On RBRACE reduce production cmds -> cmd SEMICOLON cmds 
+-- On EOL reduce production cmds -> cmd SEMICOLON cmds 
+
+State 80:
+cmds -> cmd . SEMICOLON cmds [ RBRACE EOL ]
+cmds -> cmd . SEMICOLON [ RBRACE EOL ]
+cmds -> cmd . [ RBRACE EOL ]
+-- On SEMICOLON shift to state 78
+-- On RBRACE reduce production cmds -> cmd 
+-- On EOL reduce production cmds -> cmd 
+
+State 81:
+cmd -> LBRACE cmd PARALLEL . cmd RBRACE [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On expr shift to state 66
+-- On cmd shift to state 82
+
+State 82:
+cmd -> LBRACE cmd PARALLEL cmd . RBRACE [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On RBRACE shift to state 83
+
+State 83:
+cmd -> LBRACE cmd PARALLEL cmd RBRACE . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On VAR reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On TIMES reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On SKIP reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On SEMICOLON reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On RPAREN reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On RBRACE reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On PROC reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On PLUS reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On PARALLEL reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On OR reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On NUM reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On NULL reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On MINUS reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On MALLOC reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On LPAREN reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On LBRACE reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IS_NOT_EQUAL reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IS_LESS_EQUAL reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IS_LESS reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IS_GREATER_EQUAL reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IS_GREATER reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IS_EQUAL reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IF reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On IDENT reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On EOL reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On ELSE reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On DOT reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On DIV reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On ATOM reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+-- On AND reduce production cmd -> LBRACE cmd PARALLEL cmd RBRACE 
+
+State 84:
+expr -> PROC IDENT COLON cmd . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production expr -> PROC IDENT COLON cmd 
+-- On VAR reduce production expr -> PROC IDENT COLON cmd 
+-- On TIMES reduce production expr -> PROC IDENT COLON cmd 
+-- On SKIP reduce production expr -> PROC IDENT COLON cmd 
+-- On SEMICOLON reduce production expr -> PROC IDENT COLON cmd 
+-- On RPAREN reduce production expr -> PROC IDENT COLON cmd 
+-- On RBRACE reduce production expr -> PROC IDENT COLON cmd 
+-- On PROC reduce production expr -> PROC IDENT COLON cmd 
+-- On PLUS reduce production expr -> PROC IDENT COLON cmd 
+-- On PARALLEL reduce production expr -> PROC IDENT COLON cmd 
+-- On OR reduce production expr -> PROC IDENT COLON cmd 
+-- On NUM reduce production expr -> PROC IDENT COLON cmd 
+-- On NULL reduce production expr -> PROC IDENT COLON cmd 
+-- On MINUS reduce production expr -> PROC IDENT COLON cmd 
+-- On MALLOC reduce production expr -> PROC IDENT COLON cmd 
+-- On LPAREN reduce production expr -> PROC IDENT COLON cmd 
+-- On LBRACE reduce production expr -> PROC IDENT COLON cmd 
+-- On IS_NOT_EQUAL reduce production expr -> PROC IDENT COLON cmd 
+-- On IS_LESS_EQUAL reduce production expr -> PROC IDENT COLON cmd 
+-- On IS_LESS reduce production expr -> PROC IDENT COLON cmd 
+-- On IS_GREATER_EQUAL reduce production expr -> PROC IDENT COLON cmd 
+-- On IS_GREATER reduce production expr -> PROC IDENT COLON cmd 
+-- On IS_EQUAL reduce production expr -> PROC IDENT COLON cmd 
+-- On IF reduce production expr -> PROC IDENT COLON cmd 
+-- On IDENT reduce production expr -> PROC IDENT COLON cmd 
+-- On EOL reduce production expr -> PROC IDENT COLON cmd 
+-- On ELSE reduce production expr -> PROC IDENT COLON cmd 
+-- On DOT reduce production expr -> PROC IDENT COLON cmd 
+-- On DIV reduce production expr -> PROC IDENT COLON cmd 
+-- On ATOM reduce production expr -> PROC IDENT COLON cmd 
+-- On AND reduce production expr -> PROC IDENT COLON cmd 
+
+State 85:
+bool_expr -> bool_expr . AND bool_expr [ WHILE VAR SKIP PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+bool_expr -> bool_expr . OR bool_expr [ WHILE VAR SKIP PROC OR NUM NULL MINUS MALLOC LPAREN LBRACE IF IDENT ATOM AND ]
+cmd -> WHILE bool_expr . cmd [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE shift to state 1
+-- On VAR shift to state 5
+-- On SKIP shift to state 7
+-- On PROC shift to state 2
+-- On OR shift to state 50
+-- On NUM shift to state 8
+-- On NULL shift to state 9
+-- On MINUS shift to state 10
+-- On MALLOC shift to state 26
+-- On LPAREN shift to state 11
+-- On LBRACE shift to state 30
+-- On IF shift to state 31
+-- On IDENT shift to state 57
+-- On ATOM shift to state 64
+-- On AND shift to state 53
+-- On expr shift to state 66
+-- On cmd shift to state 86
+
+State 86:
+cmd -> WHILE bool_expr cmd . [ WHILE VAR TIMES SKIP SEMICOLON RPAREN RBRACE PROC PLUS PARALLEL OR NUM NULL MINUS MALLOC LPAREN LBRACE IS_NOT_EQUAL IS_LESS_EQUAL IS_LESS IS_GREATER_EQUAL IS_GREATER IS_EQUAL IF IDENT EOL ELSE DOT DIV ATOM AND ]
+-- On WHILE reduce production cmd -> WHILE bool_expr cmd 
+-- On VAR reduce production cmd -> WHILE bool_expr cmd 
+-- On TIMES reduce production cmd -> WHILE bool_expr cmd 
+-- On SKIP reduce production cmd -> WHILE bool_expr cmd 
+-- On SEMICOLON reduce production cmd -> WHILE bool_expr cmd 
+-- On RPAREN reduce production cmd -> WHILE bool_expr cmd 
+-- On RBRACE reduce production cmd -> WHILE bool_expr cmd 
+-- On PROC reduce production cmd -> WHILE bool_expr cmd 
+-- On PLUS reduce production cmd -> WHILE bool_expr cmd 
+-- On PARALLEL reduce production cmd -> WHILE bool_expr cmd 
+-- On OR reduce production cmd -> WHILE bool_expr cmd 
+-- On NUM reduce production cmd -> WHILE bool_expr cmd 
+-- On NULL reduce production cmd -> WHILE bool_expr cmd 
+-- On MINUS reduce production cmd -> WHILE bool_expr cmd 
+-- On MALLOC reduce production cmd -> WHILE bool_expr cmd 
+-- On LPAREN reduce production cmd -> WHILE bool_expr cmd 
+-- On LBRACE reduce production cmd -> WHILE bool_expr cmd 
+-- On IS_NOT_EQUAL reduce production cmd -> WHILE bool_expr cmd 
+-- On IS_LESS_EQUAL reduce production cmd -> WHILE bool_expr cmd 
+-- On IS_LESS reduce production cmd -> WHILE bool_expr cmd 
+-- On IS_GREATER_EQUAL reduce production cmd -> WHILE bool_expr cmd 
+-- On IS_GREATER reduce production cmd -> WHILE bool_expr cmd 
+-- On IS_EQUAL reduce production cmd -> WHILE bool_expr cmd 
+-- On IF reduce production cmd -> WHILE bool_expr cmd 
+-- On IDENT reduce production cmd -> WHILE bool_expr cmd 
+-- On EOL reduce production cmd -> WHILE bool_expr cmd 
+-- On ELSE reduce production cmd -> WHILE bool_expr cmd 
+-- On DOT reduce production cmd -> WHILE bool_expr cmd 
+-- On DIV reduce production cmd -> WHILE bool_expr cmd 
+-- On ATOM reduce production cmd -> WHILE bool_expr cmd 
+-- On AND reduce production cmd -> WHILE bool_expr cmd 
+
+State 87:
+prog' -> prog . [ # ]
+-- On # accept prog
+
+State 88:
+prog -> cmds . EOL [ # ]
+-- On EOL shift to state 89
+
+State 89:
+prog -> cmds EOL . [ # ]
+-- On # reduce production prog -> cmds EOL 
+

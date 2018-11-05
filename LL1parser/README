@@ -1,5 +1,0 @@
-% # with gmake:
-% script
-% make
-% ^D
-% make clean
