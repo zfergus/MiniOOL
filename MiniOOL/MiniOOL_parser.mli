@@ -5,6 +5,7 @@ type token =
   | WHILE
   | VAR
   | TIMES
+  | THEN
   | SKIP
   | SEMICOLON
   | RPAREN

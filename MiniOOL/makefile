@@ -1,18 +1,25 @@
-all: delete
+all: clean
 	@echo "\nCreating lexer"
-	ocamllex MiniOOL_lex.mll
+	ocamllex lexer.mll
 	@echo "\nCreating parser"
-	menhir -v --explain MiniOOL_parser.mly
+	menhir -v --explain parser.mly
 	@echo "\nCompiling the lexer and parser:"
-	ocamlc -g -c MiniOOL_parser.mli
-	ocamlc -g -c MiniOOL_lex.ml
-	ocamlc -g -c MiniOOL_parser.ml
+	ocamlc -g -c abstractSyntaxTree.ml
+	ocamlc -g -c to_string.ml
+	ocamlc -g -c to_tree_string.ml
+	ocamlc -g -c staticSemantics.ml
+	ocamlc -g -c parser.mli
+	ocamlc -g -c lexer.ml
+	ocamlc -g -c parser.ml
 	@echo "\nCompiling the interpreter"
 	ocamlc -g -c MiniOOL.ml
 	@echo "\nLinking the lexer, parser, and interpreter"
-	ocamlc -g -o MiniOOL_raw MiniOOL_lex.cmo MiniOOL_parser.cmo MiniOOL.cmo
+	ocamlc -g -o MiniOOL_raw abstractSyntaxTree.cmo to_string.cmo \
+		to_tree_string.cmo staticSemantics.cmo lexer.cmo \
+		parser.cmo MiniOOL.cmo
 	echo "#!/bin/bash\nrlwrap ./MiniOOL_raw" >> MiniOOL
 	chmod +x MiniOOL
 
-delete:
-	/bin/rm -f MiniOOL MiniOOL.cmi MiniOOL.cmo MiniOOL_lex.cmi MiniOOL_lex.cmo MiniOOL_lex.ml MiniOOL_parser.cmi MiniOOL_parser.cmo MiniOOL_parser.ml MiniOOL_parser.mli makefile~
+clean:
+	/bin/rm -f *.cmo *.cmi *.cmx *.o MiniOOL MiniOOL_raw lexer.ml \
+		parser.ml parser.mli *.automaton *.conflicts makefile~

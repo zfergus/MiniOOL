@@ -1,9 +1,14 @@
-(* File miniooLEX.mll *)
+(*
+Lexer for MiniOOL
+Writen by Zachary Ferguson
+*)
+
 {
-    open MiniOOL_parser;; (* Type token defined in MiniOOL_parser.mli *)
-    exception Eof;;
-    exception Error of string;;
+  open Parser;; (* Type token defined in MiniOOL_parser.mli *)
+  exception Eof;;
+  exception Error of string;;
 }
+
 rule token = parse
     [' ' '\t'] {token lexbuf} (* skip blanks and tabs *)
   | ['\n']     {EOL}
@@ -40,6 +45,7 @@ rule token = parse
   | '}'        {RBRACE}
   | "while"    {WHILE}
   | "if"       {IF}
+  | "then"     {THEN}
   | "else"     {ELSE}
   | "|||"      {PARALLEL}
   | "atom"     {ATOM}
