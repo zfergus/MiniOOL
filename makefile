@@ -7,9 +7,9 @@ CFLAGS = -g
 SDIR = src
 
 ODIR = bin
-_OBJ = flags.cmo abstractSyntaxTree.cmo programString.cmo \
-abstractSyntaxTreeString.cmo staticSemantics.cmo lexer.cmo parser.cmo \
-MiniOOL.cmo
+_OBJ = flags.cmx abstractSyntaxTree.cmx programString.cmx \
+abstractSyntaxTreeString.cmx staticSemantics.cmx lexer.cmx parser.cmx \
+MiniOOL.cmx
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
@@ -36,7 +36,7 @@ MiniOOL: $(ODIR)/MiniOOL_raw
 # Link all compiled files together
 $(ODIR)/MiniOOL_raw: $(OBJ)
 	@echo "\033[1;32mLinking the lexer, parser, and interpreter\033[0m"
-	ocamlc -o $@ $^ $(CFLAGS)
+	ocamlopt -o $@ $^ $(CFLAGS)
 	@echo ""
 
 # Lexer
@@ -45,9 +45,9 @@ $(ODIR)/lexer.ml: $(SDIR)/lexer.mll
 	ocamllex -o $@ $<
 	@echo ""
 
-$(ODIR)/lexer.cmo: $(ODIR)/lexer.ml $(ODIR)/parser.cmi
+$(ODIR)/lexer.cmx: $(ODIR)/lexer.ml $(ODIR)/parser.cmi
 	@echo "\033[1;32m\nCompiling the lexer\033[0m"
-	ocamlc -c -o $@ -I $(ODIR) $(ODIR)/lexer.ml $(CFLAGS)
+	ocamlopt -c -o $@ -I $(ODIR) $(ODIR)/lexer.ml $(CFLAGS)
 	@echo ""
 
 # Parser
@@ -56,16 +56,16 @@ $(ODIR)/parser.ml: $(SDIR)/parser.mly
 	menhir -v --explain -b $(ODIR)/parser $(SDIR)/parser.mly
 
 $(ODIR)/parser.cmi: $(ODIR)/parser.ml
-	ocamlc -c -o $@ -I $(ODIR) $(ODIR)/parser.mli $(CFLAGS)
+	ocamlopt -c -o $@ -I $(ODIR) $(ODIR)/parser.mli $(CFLAGS)
 
-$(ODIR)/parser.cmo: $(ODIR)/parser.ml
+$(ODIR)/parser.cmx: $(ODIR)/parser.ml
 	@echo "\033[1;32mCompiling the parser\033[0m"
-	ocamlc -c -o $@ -I $(ODIR) $< $(CFLAGS)
+	ocamlopt -c -o $@ -I $(ODIR) $< $(CFLAGS)
 	@echo ""
 
-$(ODIR)/%.cmo: $(SDIR)/%.ml
+$(ODIR)/%.cmx: $(SDIR)/%.ml
 	@echo "\033[1;32mCompiling $<\033[0m"
-	ocamlc -c -o $@ -I $(ODIR) $< $(CFLAGS)
+	ocamlopt -c -o $@ -I $(ODIR) $< $(CFLAGS)
 	@echo ""
 
 # Clean up build files

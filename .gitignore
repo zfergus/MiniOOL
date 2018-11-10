@@ -1,4 +1,4 @@
-## Mac gOS
+## Mac OS
 # General
 .DS_Store
 .AppleDouble
@@ -53,9 +53,4 @@ setup.log
 .merlin
 
 ## Mine
-calculator-menhir
-calculator-ocamlyacc
-grammarLR0conflicts
-lectures
-midterm
-MiniOOL/bin
+bin
