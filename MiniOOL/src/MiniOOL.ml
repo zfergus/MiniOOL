@@ -1,17 +1,24 @@
 (*
 Main cmd-line interface for MiniOOL
-Writen by Zachary Ferguson
+Written by Zachary Ferguson
 *)
 open Parsing;;
-
 print_endline "MiniOOL (Fall 2018)\nHonors Programming Languages\nCreated by Zachary Ferguson";;
+
+Arg.parse
+  [("--verbose",
+    Arg.Unit (fun () -> Flags.verbose := true),
+    "Verbosly print steps of interpretation.")]
+  (fun s -> ())
+  "\nUsage: MiniOOL [--verbose] [-help|--help]";;
+(* Flags.verbose := false;; *)
 
 try
   let lexbuf = Lexing.from_channel stdin (* Parse from the standard input *)
   and err_str = "\027[31;1mError\027[0m: " in (* Colored "Error: " *)
   while true do (* Loop until end of file (^D) *)
     (try
-       print_string "# "; flush stdout; (* Print the prompt # *)
+       Printf.printf "# %!"; (* Print the prompt # *)
        (* Parse the standard input *)
        Parser.prog Lexer.token lexbuf
      with (* Handle errors incountered *)
@@ -25,4 +32,4 @@ try
     Lexing.flush_input lexbuf; (* Clear the input buffer *)
     clear_parser ();
   done
-with Lexer.Eof -> print_string "\nEnd of file reached\nExiting\n"; ();;
+with Lexer.Eof -> print_endline "\nExiting";;

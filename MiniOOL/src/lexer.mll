@@ -1,6 +1,6 @@
 (*
 Lexer for MiniOOL
-Writen by Zachary Ferguson
+Written by Zachary Ferguson
 *)
 
 {
@@ -24,9 +24,9 @@ rule token = parse
   | "=="       {IS_EQUAL}
   | "!=" | "<>" {IS_NOT_EQUAL}
   | '<'        {IS_LESS}
-  | '<' '='    {IS_LESS_EQUAL}
+  | "<="    {IS_LESS_EQUAL}
   | '>'        {IS_GREATER}
-  | '>' '='    {IS_GREATER_EQUAL}
+  | ">="    {IS_GREATER_EQUAL}
   | "not" | "!"   {NOT}
   | "&&"  | "and" {AND}
   | "||"  | "or"  {OR}
@@ -35,6 +35,7 @@ rule token = parse
   | '-'        {MINUS}
   | '*'        {TIMES}
   | '/'        {DIV}
+  | '%' | "mod" {MOD}
   | '('        {LPAREN}
   | ')'        {RPAREN}
   | "var"      {VAR}
@@ -51,6 +52,6 @@ rule token = parse
   | "atom"     {ATOM}
   | ['0'-'9']+ as num
                {NUM (int_of_string num)}
-  | (['a'-'z'] | ['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')* as idt
-               {IDENT idt}
-  | _          {raise (Error (Printf.sprintf "unexpected character: %s" (Lexing.lexeme lexbuf))) }
+  | (['a'-'z'] | ['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')* as id
+               {IDENT id}
+  | _ as c {raise (Error (Printf.sprintf "unexpected character: %c" c)) }

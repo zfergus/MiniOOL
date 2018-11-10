@@ -1,12 +1,12 @@
 (*
 Parser for MiniOOL
-Writen by Zachary Ferguson
+Written by Zachary Ferguson
 *)
 
 %{ (* header *)
 open AbstractSyntaxTree;;
-open To_string;;
-open To_tree_string;;
+open ProgramString;;
+open AbstractSyntaxTreeString;;
 open StaticSemantics;;
 %} (* declarations *)
 
@@ -14,7 +14,7 @@ open StaticSemantics;;
 %token EOL PROC SEMICOLON COLON DOT ASSIGN NULL
 %token IS_EQUAL IS_NOT_EQUAL IS_LESS IS_LESS_EQUAL IS_GREATER IS_GREATER_EQUAL
 %token NOT AND OR
-%token PLUS MINUS TIMES DIV LPAREN RPAREN
+%token PLUS MINUS TIMES DIV MOD LPAREN RPAREN
 %token VAR MALLOC SKIP RBRACE LBRACE WHILE IF THEN ELSE PARALLEL ATOM
 %token <string> IDENT
 %token <int> NUM
@@ -30,7 +30,7 @@ open StaticSemantics;;
 %nonassoc NOT
 %left IS_LESS IS_LESS_EQUAL IS_GREATER IS_GREATER_EQUAL IS_NOT_EQUAL IS_EQUAL
 %left PLUS MINUS
-%left TIMES DIV
+%left TIMES DIV MOD
 %nonassoc UMINUS
 /* %left DOT */
 (* highest precedence *)
@@ -39,11 +39,11 @@ open StaticSemantics;;
 
 prog:
     ast = cmds EOL  {let scope = Hashtbl.create 10 in
-                     check_cmds_in_scope scope ast; print_scope scope;
-                     print_endline (cmds_to_string ast);
-                     print_endline "AST built:";
-                     print_string (cmds_to_tree_string ast "");
-                     flush stdout; ()}
+                     check_cmds_in_scope scope ast;
+                     if !(Flags.verbose) then
+                        (print_scope scope; print_endline (cmds_to_string ast);
+                        Printf.printf "Abstract Syntax Tree:\n%s\n" (tree_string_of_cmds ast []))
+                     else ()}
 
 cmds:
     c1 = cmd SEMICOLON c2 = cmds {c1 :: c2}
@@ -57,12 +57,13 @@ cmd:
   | p = expr LPAREN y = expr RPAREN                 {ProceduceCall (p, y)}
   | MALLOC LPAREN x=IDENT RPAREN                    {MallocVar (ref x)}
   | MALLOC LPAREN xf=field RPAREN                   {MallocField xf}
-  | VAR x = IDENT ASSIGN e = expr                   {Cmds [(Declare (ref x)); (Assign ((ref x), e))]}
+  | VAR x = IDENT ASSIGN e = expr                   {CmdSequence [(Declare (ref x)); (Assign ((ref x), e))]}
   | x = IDENT ASSIGN e = expr                       {Assign ((ref x), e)}
   | xf = field ASSIGN e = expr                      {FieldAssign (xf, e)}
   | SKIP                                            {Skip}
-  | LBRACE c = cmds RBRACE                          {Cmds c}
+  | LBRACE c = cmds RBRACE                          {CmdSequence c}
   | WHILE b = bool_expr c = cmd                     {While (b, c)}
+  | IF b = bool_expr c1 = cmd ELSE c2 = cmd         {IfElse (b, c1, c2)}
   | IF b = bool_expr THEN c1 = cmd ELSE c2 = cmd    {IfElse (b, c1, c2)}
   | LBRACE c1 = cmd PARALLEL c2 = cmd RBRACE        {Parallel (c1, c2)}
   | ATOM LPAREN c = cmd RPAREN                      {Atom c}
@@ -86,6 +87,7 @@ expr:
   | e1 = expr MINUS e2 = expr     {ArithmeticBinaryOperator (( - ), e1, e2)}
   | e1 = expr TIMES e2 = expr     {ArithmeticBinaryOperator (( * ), e1, e2)}
   | e1 = expr DIV   e2 = expr     {ArithmeticBinaryOperator (( / ), e1, e2)}
+  | e1 = expr MOD   e2 = expr     {ArithmeticBinaryOperator (( mod ), e1, e2)}
   | MINUS e = expr                {ArithmeticUnaryOperator  (( ~- ), e)} %prec UMINUS
   | LPAREN e = expr RPAREN        {e}
   | NULL                          {Null}

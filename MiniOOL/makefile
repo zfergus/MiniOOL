@@ -1,25 +1,75 @@
-all: clean
-	@echo "\nCreating lexer"
-	ocamllex lexer.mll
-	@echo "\nCreating parser"
-	menhir -v --explain parser.mly
-	@echo "\nCompiling the lexer and parser:"
-	ocamlc -g -c abstractSyntaxTree.ml
-	ocamlc -g -c to_string.ml
-	ocamlc -g -c to_tree_string.ml
-	ocamlc -g -c staticSemantics.ml
-	ocamlc -g -c parser.mli
-	ocamlc -g -c lexer.ml
-	ocamlc -g -c parser.ml
-	@echo "\nCompiling the interpreter"
-	ocamlc -g -c MiniOOL.ml
-	@echo "\nLinking the lexer, parser, and interpreter"
-	ocamlc -g -o MiniOOL_raw abstractSyntaxTree.cmo to_string.cmo \
-		to_tree_string.cmo staticSemantics.cmo lexer.cmo \
-		parser.cmo MiniOOL.cmo
-	echo "#!/bin/bash\nrlwrap ./MiniOOL_raw" >> MiniOOL
-	chmod +x MiniOOL
+# Compile MiniOOL
+# Created by Zachary Ferguson
 
+# Compiler flags
+CFLAGS = -g
+
+SDIR = src
+
+ODIR = bin
+_OBJ = flags.cmo abstractSyntaxTree.cmo programString.cmo \
+abstractSyntaxTreeString.cmo staticSemantics.cmo lexer.cmo parser.cmo \
+MiniOOL.cmo
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+
+# Print some helpful usage information
+.PHONY: all
+all: $(ODIR) MiniOOL
+	@echo "\033[1;32mSuccessfully compiled MiniOOL!\033[0m"
+	@echo "To use MiniOOL run '\033[1;36m./MiniOOL\033[0m'."
+	@echo "Optionally run '\033[1;36m./MiniOOL --verbose\033[0m' to print the\n\
+	abstract syntax tree and additional information."
+
+$(ODIR):
+	@echo "\033[1;32mMaking a bin directory to store object files\033[0m"
+	mkdir -p $(ODIR)
+	@echo ""
+
+# Wrap MiniOOL_raw with rlwrap so it has a history and arrow key usage
+MiniOOL: $(ODIR)/MiniOOL_raw
+	@echo "\033[1;32mCreating a script to wrap MiniOOL with rlwrap\033[0m"
+	printf "#!/bin/bash\nrlwrap ./$(ODIR)/MiniOOL_raw \"$$%s\"" "@" > MiniOOL
+	chmod +x MiniOOL
+	@echo ""
+
+# Link all compiled files together
+$(ODIR)/MiniOOL_raw: $(OBJ)
+	@echo "\033[1;32mLinking the lexer, parser, and interpreter\033[0m"
+	ocamlc -o $@ $^ $(CFLAGS)
+	@echo ""
+
+# Lexer
+$(ODIR)/lexer.ml: $(SDIR)/lexer.mll
+	@echo "\033[1;32mCreating lexer\033[0m"
+	ocamllex -o $@ $<
+	@echo ""
+
+$(ODIR)/lexer.cmo: $(ODIR)/lexer.ml $(ODIR)/parser.cmi
+	@echo "\033[1;32m\nCompiling the lexer\033[0m"
+	ocamlc -c -o $@ -I $(ODIR) $(ODIR)/lexer.ml $(CFLAGS)
+	@echo ""
+
+# Parser
+$(ODIR)/parser.ml: $(SDIR)/parser.mly
+	@echo "\033[1;32mCreating parser\033[0m"
+	menhir -v --explain -b $(ODIR)/parser $(SDIR)/parser.mly
+
+$(ODIR)/parser.cmi: $(ODIR)/parser.ml
+	ocamlc -c -o $@ -I $(ODIR) $(ODIR)/parser.mli $(CFLAGS)
+
+$(ODIR)/parser.cmo: $(ODIR)/parser.ml
+	@echo "\033[1;32mCompiling the parser\033[0m"
+	ocamlc -c -o $@ -I $(ODIR) $< $(CFLAGS)
+	@echo ""
+
+$(ODIR)/%.cmo: $(SDIR)/%.ml
+	@echo "\033[1;32mCompiling $<\033[0m"
+	ocamlc -c -o $@ -I $(ODIR) $< $(CFLAGS)
+	@echo ""
+
+# Clean up build files
+.PHONY: clean
 clean:
-	/bin/rm -f *.cmo *.cmi *.cmx *.o MiniOOL MiniOOL_raw lexer.ml \
-		parser.ml parser.mli *.automaton *.conflicts makefile~
+	@echo "\033[1;32mCleaning up build files\033[0m"
+	/bin/rm -rf $(ODIR) MiniOOL makefile~

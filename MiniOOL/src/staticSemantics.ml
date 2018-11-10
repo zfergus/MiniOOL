@@ -1,5 +1,10 @@
+(*
+Static semantics for MiniOOL
+Written by Zachary Ferguson
+*)
+
 open AbstractSyntaxTree;;
-open To_string;;
+open ProgramString;;
 
 (* Convert an integer into a string of subscript digits. *)
 let subscript_digits = [|"₀"; "₁"; "₂"; "₃"; "₄"; "₅"; "₆"; "₇"; "₈"; "₉"|];;
@@ -126,7 +131,7 @@ and check_cmd_in_scope scope c =
     | FieldAssign (xf, e) ->
       check_field_in_scope scope xf;
       check_expr_in_scope scope e
-    | Cmds cs -> check_cmds_in_scope scope cs
+    | CmdSequence cs -> check_cmds_in_scope scope cs
     | While (b, c1) -> let while_scope = copy_scope scope in
       check_bool_expr_in_scope while_scope b;
       check_cmd_in_scope while_scope c1;
