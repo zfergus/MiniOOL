@@ -1,7 +1,6 @@
-(*
-Main cmd-line interface for MiniOOL
-Written by Zachary Ferguson
-*)
+(** Main cmd-line interface for MiniOOL
+
+    Written by Zachary Ferguson *)
 open Parsing;;
 print_endline "MiniOOL (Fall 2018)\nHonors Programming Languages\nCreated by Zachary Ferguson";;
 

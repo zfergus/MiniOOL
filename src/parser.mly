@@ -1,7 +1,6 @@
-(*
-Parser for MiniOOL
-Written by Zachary Ferguson
-*)
+(** Parser for MiniOOL
+
+    Written by Zachary Ferguson *)
 
 %{ (* header *)
 open AbstractSyntaxTree;;

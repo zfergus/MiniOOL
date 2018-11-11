@@ -1,15 +1,17 @@
 # Compile MiniOOL
-# Created by Zachary Ferguson
+# Written by Zachary Ferguson
 
 # Compiler flags
 CFLAGS = -g
 
 SDIR = src
-
+DDIR = doc
 ODIR = bin
-_OBJ = flags.cmx abstractSyntaxTree.cmx programString.cmx \
-abstractSyntaxTreeString.cmx staticSemantics.cmx lexer.cmx parser.cmx \
-MiniOOL.cmx
+_OBJ_PARSER = flags.cmx abstractSyntaxTree.cmx programString.cmx \
+abstractSyntaxTreeString.cmx staticSemantics.cmx lexer.cmx
+_OBJ = $(_OBJ_PARSER) parser.cmx MiniOOL.cmx
+OBJ_PARSER = $(patsubst %,$(ODIR)/%,$(_OBJ_PARSER))
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
@@ -58,8 +60,13 @@ $(ODIR)/parser.ml: $(SDIR)/parser.mly
 $(ODIR)/parser.cmi: $(ODIR)/parser.ml
 	ocamlopt -c -o $@ -I $(ODIR) $(ODIR)/parser.mli $(CFLAGS)
 
-$(ODIR)/parser.cmx: $(ODIR)/parser.ml
+$(ODIR)/parser.cmx: $(ODIR)/parser.ml $(OBJ_PARSER)
 	@echo "\033[1;32mCompiling the parser\033[0m"
+	ocamlopt -c -o $@ -I $(ODIR) $< $(CFLAGS)
+	@echo ""
+
+$(ODIR)/MiniOOL.cmx: $(SDIR)/MiniOOL.ml $(SDIR)/flags.ml $(ODIR)/parser.cmx
+	@echo "\033[1;32mCompiling the MiniOOL.ml\033[0m"
 	ocamlopt -c -o $@ -I $(ODIR) $< $(CFLAGS)
 	@echo ""
 
@@ -67,6 +74,11 @@ $(ODIR)/%.cmx: $(SDIR)/%.ml
 	@echo "\033[1;32mCompiling $<\033[0m"
 	ocamlopt -c -o $@ -I $(ODIR) $< $(CFLAGS)
 	@echo ""
+
+.PHONY: docs
+docs:
+	mkdir -p $(DDIR)
+	ocamldoc -html -I $(ODIR) -d $(DDIR) $(SDIR)/*.ml $(ODIR)/*.ml
 
 # Clean up build files
 .PHONY: clean

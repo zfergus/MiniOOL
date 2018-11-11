@@ -1,7 +1,6 @@
-(*
-Semantic Domains
-Written by Zachary Ferguson
-*)
+(** Semantic Domains
+
+    Written by Zachary Ferguson *)
 
 (*
 Semantic domains:
