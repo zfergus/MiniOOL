@@ -14,6 +14,9 @@ OBJ_PARSER = $(patsubst %,$(ODIR)/%,$(_OBJ_PARSER))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
+_DEPS = flags.ml abstractSyntaxTree.ml programString.ml \
+abstractSyntaxTreeString.ml staticSemantics.ml lexer.ml
+DEPS = $(patsubst %,$(SDIR)/%,$(_DEPS))
 
 # Print some helpful usage information
 .PHONY: all
@@ -77,8 +80,9 @@ $(ODIR)/%.cmx: $(SDIR)/%.ml
 
 .PHONY: docs
 docs:
+	@echo "\033[1;32mCreating documentation files\033[0m"
 	mkdir -p $(DDIR)
-	ocamldoc -html -I $(ODIR) -d $(DDIR) $(SDIR)/*.ml $(ODIR)/*.ml
+	ocamldoc -html -charset "utf-8" -I $(ODIR) -d $(DDIR) $(SDIR)/*.ml $(ODIR)/*.ml
 
 # Clean up build files
 .PHONY: clean

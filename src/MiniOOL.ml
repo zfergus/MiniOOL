@@ -1,11 +1,13 @@
 (** Main cmd-line interface for MiniOOL
-
-    Written by Zachary Ferguson *)
+    @author Zachary Ferguson *)
 open Parsing;;
 print_endline "MiniOOL (Fall 2018)\nHonors Programming Languages\nCreated by Zachary Ferguson";;
 
 Arg.parse
   [("--verbose",
+    Arg.Unit (fun () -> Flags.verbose := true),
+    "Verbosly print steps of interpretation.");
+   ("-verbose",
     Arg.Unit (fun () -> Flags.verbose := true),
     "Verbosly print steps of interpretation.")]
   (fun s -> ())
@@ -22,6 +24,8 @@ try
        Parser.prog Lexer.token lexbuf
      with (* Handle errors incountered *)
      | Failure msg -> Printf.fprintf stderr "%s%s\n%!" err_str msg
+     | StaticSemantics.VariableOutOfScope msg -> 
+       Printf.fprintf stderr "%s%s\n%!" err_str msg
      | Parser.Error ->
        Printf.fprintf stderr
          "%sSyntax error (syntax error at offset %d)\n%!" err_str

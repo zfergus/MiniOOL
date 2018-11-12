@@ -1,6 +1,5 @@
 (** Parser for MiniOOL
-
-    Written by Zachary Ferguson *)
+    @author Zachary Ferguson *)
 
 %{ (* header *)
 open AbstractSyntaxTree;;
@@ -41,7 +40,7 @@ prog:
                      check_cmds_in_scope scope ast;
                      if !(Flags.verbose) then
                         (print_scope scope; print_endline (cmds_to_string ast);
-                        Printf.printf "Abstract Syntax Tree:\n%s\n" (tree_string_of_cmds ast []))
+                        Printf.printf "Abstract Syntax Tree:\n%s\n" (tree_string_of_cmds ast ""))
                      else ()}
 
 cmds:

@@ -1,7 +1,5 @@
-(*
-Lexer for MiniOOL
-Written by Zachary Ferguson
-*)
+(** Lexer tokens and regular expressions for MiniOOL.
+    @author Zachary Ferguson *)
 
 {
   open Parser;; (* Type token defined in MiniOOL_parser.mli *)
