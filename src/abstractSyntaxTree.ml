@@ -6,36 +6,34 @@
 type ident = string ref;;
 
 (** Fields: Either an ident with a string or a series of field string pairs. *)
-type field = Field of ident * string | FieldExpr of field * string
+type field = TerminalField of ident * string | RecursiveField of field * string
 
 (** Expressions *)
 and expr =
-    Num of int (** Number *)
-  | ArithmeticBinaryOperator of (int -> int -> int) * expr * expr
+  | Num of int (** Number *)
+  | BinaryArithmeticOperator of (int -> int -> int) * expr * expr
   (** Integer binary operations: +, -, *, /, % *)
-  | ArithmeticUnaryOperator of (int -> int) * expr
+  | UnaryArithmeticOperator of (int -> int) * expr
   (** Integer unary operations: - *)
   | Null (** Null location *)
-  | FieldAccess of field
-  (** Accessing a field: e.e *)
+  | FieldAccess of field (** Accessing a field: e.e *)
   | Procedure of ident * cmd
   (** Procedure declaration: only one parameter, no return value *)
-  | Ident of ident
-  (** Identifier: variable name *)
+  | Ident of ident (** Identifier: variable name *)
 
 (** Boolean Expressions *)
 and bool_expr =
-    Bool of bool (** Boolean literals: true or false *)
-  | ComparisonBinaryOperator of (int -> int -> bool) * expr * expr
+  | Bool of bool (** Boolean literals: true or false *)
+  | BinaryComparisonOperator of (int -> int -> bool) * expr * expr
   (** Comparison of integer operations: ==, != (<>), <, <=, >, >= *)
-  | BoolUnaryOperator of (bool -> bool) * bool_expr
+  | UnaryLogicOperator of (bool -> bool) * bool_expr
   (** Boolean unary operations: ! (not) *)
-  | BoolBinaryOperator of (bool -> bool -> bool) * bool_expr * bool_expr
+  | BinaryLogicOperator of (bool -> bool -> bool) * bool_expr * bool_expr
   (** Boolean binary operations: && (and), || (or) *)
 
 (** Commands *)
 and cmd =
-    Declare of ident (** Declare an identifier: var *)
+  | Declare of ident (** Declare an identifier: var *)
   | ProceduceCall of expr * expr (** Procedure call: (e)(e) *)
   | MallocVar of ident (** Allocate a simple identifier on the heap *)
   | MallocField of field (** Allocate a field of an identifier to allow x.f.f *)

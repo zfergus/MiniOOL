@@ -4,6 +4,9 @@
 open AbstractSyntaxTree;;
 open ProgramString;;
 
+let print_warning warning =
+  Printf.fprintf stderr "\027[33;1mWarning\027[0m: %s\n%!" warning;;
+
 (** Exception indicating a variable is out of scope. *)
 exception VariableOutOfScope of string;;
 
@@ -67,8 +70,8 @@ let get_current_unique_ident scope id =
     @param xf field to get the identifier.
     @return the identifier of the field access. *)
 let rec get_ident_of_field xf = match xf with
-  | Field (x, f) -> x
-  | FieldExpr (xf, f) -> (get_ident_of_field xf);;
+  | TerminalField (x, f) -> x
+  | RecursiveField (xf, f) -> (get_ident_of_field xf);;
 
 
 (** Add the id to the scope of scope and uniquify the id.
@@ -85,9 +88,14 @@ let declare_ident_in_scope scope id =
     @return a boolean for if the id is in the scope of scope. *)
 let is_id_in_scope scope id =
   match Hashtbl.find_opt scope !id with
-  | None -> false
-  (* id is in scope if the current version is not negative. *)
-  | Some r -> r.current >= 0;;
+  (* Implicitly declare global variables *)
+  | None ->
+    print_warning
+      (Printf.sprintf
+         "Undeclared variable \"%s\" implicitly declared as global" !id);
+    Hashtbl.add scope !id {count = 0; current = -1}; true
+  (* Identifiers are always in scope because they might be global. *)
+  | Some r -> true;;
 
 
 (** Checks if id is in the scope of scope.
@@ -117,9 +125,9 @@ let check_field_in_scope scope xf =
     @raise VariableOutOfScope An identifier is not in scope. *)
 let rec check_expr_in_scope scope e =
   match e with
-  | ArithmeticBinaryOperator (op, e1, e2) ->
+  | BinaryArithmeticOperator (op, e1, e2) ->
     (check_expr_in_scope scope e1; check_expr_in_scope scope e2)
-  | ArithmeticUnaryOperator (op, e1) -> check_expr_in_scope scope e1
+  | UnaryArithmeticOperator (op, e1) -> check_expr_in_scope scope e1
   | FieldAccess xf -> check_field_in_scope scope xf
   | Procedure (id, c) ->
     let proc_scope = copy_scope scope in
@@ -138,11 +146,11 @@ let rec check_expr_in_scope scope e =
     @raise VariableOutOfScope An identifier is not in scope. *)
 and check_bool_expr_in_scope scope b =
   match b with
-  | ComparisonBinaryOperator (op, e1, e2) ->
+  | BinaryComparisonOperator (op, e1, e2) ->
     ((check_expr_in_scope scope e1); (check_expr_in_scope scope e2))
-  | BoolUnaryOperator (op, b1) ->
+  | UnaryLogicOperator (op, b1) ->
     (check_bool_expr_in_scope scope b1)
-  | BoolBinaryOperator (op, b1, b2) ->
+  | BinaryLogicOperator (op, b1, b2) ->
     ((check_bool_expr_in_scope scope b1); (check_bool_expr_in_scope scope b2))
   | _ -> ()
 
@@ -189,7 +197,7 @@ and check_cmd_in_scope scope c =
     | Atom c1 -> check_cmd_in_scope scope c1
     | _ -> ()
   with VariableOutOfScope msg ->
-    raise (VariableOutOfScope (msg ^ " in " ^ (cmd_to_string c)))
+    raise (VariableOutOfScope (msg ^ " in " ^ (string_of_cmd c)))
 
 (** Checks if the commands ast are in the scope of scope.
     If not then fail else update and relevant idents to be the current
@@ -203,7 +211,11 @@ and check_cmds_in_scope scope ast =
   | h :: t -> check_cmd_in_scope scope h; check_cmds_in_scope scope t;;
 
 (** Print the entrys of the scope Hashtbl. *)
-let rec print_scope scope = Hashtbl.iter (
-    fun k v ->
-      Printf.printf "%s: {count = %d; current = %d}\n" k v.count v.current)
-    scope;;
+let string_of_scope scope =
+  let buff = Buffer.create ((Hashtbl.length scope) * 30) in
+  Hashtbl.iter (fun k v ->
+      Buffer.add_string buff
+        (Printf.sprintf "%s: {count = %d; current = %d}\n"
+           k v.count v.current))
+    scope;
+  Buffer.contents buff;;

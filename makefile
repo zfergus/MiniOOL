@@ -8,14 +8,16 @@ SDIR = src
 DDIR = doc
 ODIR = bin
 _OBJ_PARSER = flags.cmx abstractSyntaxTree.cmx programString.cmx \
-abstractSyntaxTreeString.cmx staticSemantics.cmx lexer.cmx
+abstractSyntaxTreeString.cmx staticSemantics.cmx semanticDomains.cmx \
+operationalSemantics.cmx lexer.cmx
 _OBJ = $(_OBJ_PARSER) parser.cmx MiniOOL.cmx
 OBJ_PARSER = $(patsubst %,$(ODIR)/%,$(_OBJ_PARSER))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 _DEPS = flags.ml abstractSyntaxTree.ml programString.ml \
-abstractSyntaxTreeString.ml staticSemantics.ml lexer.ml
+abstractSyntaxTreeString.ml staticSemantics.ml semanticDomains.ml \
+operationalSemantics.ml lexer.ml
 DEPS = $(patsubst %,$(SDIR)/%,$(_DEPS))
 
 # Print some helpful usage information

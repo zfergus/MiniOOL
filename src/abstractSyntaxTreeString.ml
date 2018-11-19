@@ -63,11 +63,11 @@ let rec tree_string_of_field id prefix mkr =
   and next_line_prefix = mkr_to_next_line_prefix prefix mkr
   and new_prefix = prefix ^ (string_of_depth_marker mkr) in
   match id with
-  | Field (x, f) ->
+  | TerminalField (x, f) ->
     (tree_string_of_expr (Ident x) prev_line_prefix UpTurn) ^ "\n" ^
     new_prefix ^ "(.)\n" ^
     (tree_string_of_expr (Ident (ref f)) next_line_prefix DownTurn)
-  | FieldExpr (id', f) ->
+  | RecursiveField (id', f) ->
     (tree_string_of_field id' prev_line_prefix UpTurn) ^ "\n" ^
     new_prefix ^ "(.)\n" ^
     (tree_string_of_expr (Ident (ref f)) next_line_prefix DownTurn)
@@ -84,16 +84,16 @@ and tree_string_of_bool_expr b prefix mkr =
   and new_prefix = prefix ^ (string_of_depth_marker mkr) in
   match b with
   | Bool b -> new_prefix ^ if b then "(true)" else "(false)"
-  | ComparisonBinaryOperator (op, e1, e2) ->
+  | BinaryComparisonOperator (op, e1, e2) ->
     (tree_string_of_expr e1 prev_line_prefix UpTurn) ^ "\n" ^
-    Printf.sprintf "%s(%s)\n" new_prefix (bool_op_to_string b) ^
+    Printf.sprintf "%s(%s)\n" new_prefix (string_of_bool_op b) ^
     (tree_string_of_expr e2 next_line_prefix DownTurn)
-  | BoolUnaryOperator (op, b1) ->
-    Printf.sprintf "%s(%s)\n" new_prefix (bool_op_to_string b) ^
+  | UnaryLogicOperator (op, b1) ->
+    Printf.sprintf "%s(%s)\n" new_prefix (string_of_bool_op b) ^
     (tree_string_of_bool_expr b1 next_line_prefix DownTurn)
-  | BoolBinaryOperator (op, b1, b2) ->
+  | BinaryLogicOperator (op, b1, b2) ->
     (tree_string_of_bool_expr b1 prev_line_prefix UpTurn) ^ "\n" ^
-    Printf.sprintf "%s(%s)\n" new_prefix (bool_op_to_string b) ^
+    Printf.sprintf "%s(%s)\n" new_prefix (string_of_bool_op b) ^
     (tree_string_of_bool_expr b2 next_line_prefix DownTurn)
 
 
@@ -111,12 +111,12 @@ and tree_string_of_expr e prefix mkr =
   | Null -> new_prefix ^ "(null)"
   | Ident x -> Printf.sprintf "%s(%s)" new_prefix !x
   | FieldAccess f -> tree_string_of_field f prefix mkr
-  | ArithmeticBinaryOperator (op, e1, e2) ->
+  | BinaryArithmeticOperator (op, e1, e2) ->
     (tree_string_of_expr e1 prev_line_prefix UpTurn) ^ "\n" ^
-    new_prefix ^ (Printf.sprintf "(%s)\n" (arithmetic_op_to_string e)) ^
+    new_prefix ^ (Printf.sprintf "(%s)\n" (string_of_arithmetic_op e)) ^
     (tree_string_of_expr e2 next_line_prefix DownTurn)
-  | ArithmeticUnaryOperator (op, e1) ->
-    new_prefix ^ (Printf.sprintf "(%s)\n" (arithmetic_op_to_string e)) ^
+  | UnaryArithmeticOperator (op, e1) ->
+    new_prefix ^ (Printf.sprintf "(%s)\n" (string_of_arithmetic_op e)) ^
     (tree_string_of_expr e1 next_line_prefix DownTurn)
   | Procedure (y, c) ->
     new_prefix ^ "(proc)\n" ^
