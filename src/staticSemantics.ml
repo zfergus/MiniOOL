@@ -32,12 +32,15 @@ type scope_rec = {mutable count: int; mutable current: int};;
 let add_id_to_scope scope id =
   match (Hashtbl.find_opt scope !id) with
   | None -> Hashtbl.add scope !id {count = 1; current = 0}
-  | Some r -> (r.current <- r.count; r.count <- r.count + 1);;
+  | Some r -> r.current <- r.count; r.count <- r.count + 1;
+    if r.count == -1 then
+      failwith ("Identifier count overflow (identifier " ^ !id ^
+                " declared the maximum amount of times allowable)");;
 
 
 (** Deep copy of the scope.
     @param scope Current variables declared and the number of time declared.
-    @returns the new copy *)
+    @return the new copy. *)
 let copy_scope scope = let scope' = Hashtbl.create (Hashtbl.length scope) in
   Hashtbl.iter
     (fun k v -> (Hashtbl.add scope' k {count = v.count; current = v.current}))
@@ -64,14 +67,6 @@ let update_scope scope scope' = (
     @return a new unique identifier for the given identifier. *)
 let get_current_unique_ident scope id =
   !id ^ (subscript_string_of_int (Hashtbl.find scope !id).current);;
-
-
-(** Get the identifier of a field (i.e. x.f. ... .f => x).
-    @param xf field to get the identifier.
-    @return the identifier of the field access. *)
-let rec get_ident_of_field xf = match xf with
-  | TerminalField (x, f) -> x
-  | RecursiveField (xf, f) -> (get_ident_of_field xf);;
 
 
 (** Add the id to the scope of scope and uniquify the id.
@@ -108,15 +103,6 @@ let check_ident_in_scope scope id =
   else raise (VariableOutOfScope ("Variable " ^ !id ^ " is not defined"));;
 
 
-(** Checks if the field is in the scope of scope.
-    If not then fail else update id to be the current version.
-    @param scope Current variables declared and the number of time declared.
-    @param xf Field to check the scope of.
-    @raise VariableOutOfScope The identifier is not scope. *)
-let check_field_in_scope scope xf =
-  let x = (get_ident_of_field xf) in (check_ident_in_scope scope x);;
-
-
 (** Checks if the expression e is in the scope of scope.
     If not then fail else update and relevant idents to be the current
     version.
@@ -125,17 +111,18 @@ let check_field_in_scope scope xf =
     @raise VariableOutOfScope An identifier is not in scope. *)
 let rec check_expr_in_scope scope e =
   match e with
+  | Field _ | Num _ | Null -> ()
   | BinaryArithmeticOperator (op, e1, e2) ->
-    (check_expr_in_scope scope e1; check_expr_in_scope scope e2)
+    check_expr_in_scope scope e1; check_expr_in_scope scope e2
   | UnaryArithmeticOperator (op, e1) -> check_expr_in_scope scope e1
-  | FieldAccess xf -> check_field_in_scope scope xf
+  | Variable id -> check_ident_in_scope scope id
+  | FieldAccess (e1, e2) ->
+    check_expr_in_scope scope e1; check_expr_in_scope scope e2
   | Procedure (id, c) ->
     let proc_scope = copy_scope scope in
     declare_ident_in_scope proc_scope id;
     check_cmd_in_scope proc_scope c;
     update_scope scope proc_scope
-  | Ident id -> check_ident_in_scope scope id
-  | _ -> ()
 
 
 (** Checks if the boolean expression b is in the scope of scope.
@@ -146,13 +133,13 @@ let rec check_expr_in_scope scope e =
     @raise VariableOutOfScope An identifier is not in scope. *)
 and check_bool_expr_in_scope scope b =
   match b with
+  | Bool _ -> ()
   | BinaryComparisonOperator (op, e1, e2) ->
     ((check_expr_in_scope scope e1); (check_expr_in_scope scope e2))
   | UnaryLogicOperator (op, b1) ->
     (check_bool_expr_in_scope scope b1)
   | BinaryLogicOperator (op, b1, b2) ->
     ((check_bool_expr_in_scope scope b1); (check_bool_expr_in_scope scope b2))
-  | _ -> ()
 
 (** Checks if the command c is in the scope of scope.
     If not then fail else update and relevant idents to be the current
@@ -166,14 +153,15 @@ and check_cmd_in_scope scope c =
     | Declare id -> declare_ident_in_scope scope id
     | ProceduceCall (e1, e2) ->
       check_expr_in_scope scope e1; check_expr_in_scope scope e2
-    | MallocVar id -> check_ident_in_scope scope id
-    | MallocField xf -> check_field_in_scope scope xf
+    | Malloc x -> check_ident_in_scope scope x
     | Assign (id, e) ->
       check_ident_in_scope scope id;
       check_expr_in_scope scope e
-    | FieldAssign (xf, e) ->
-      check_field_in_scope scope xf;
-      check_expr_in_scope scope e
+    | FieldAssign (e1, e2, e3) ->
+      check_expr_in_scope scope e1;
+      check_expr_in_scope scope e2;
+      check_expr_in_scope scope e3
+    | Skip -> ()
     | CmdSequence cs -> check_cmds_in_scope scope cs
     | While (b, c1) -> let while_scope = copy_scope scope in
       check_bool_expr_in_scope while_scope b;
@@ -195,7 +183,6 @@ and check_cmd_in_scope scope c =
        check_cmd_in_scope c2_scope c2;
        update_scope scope c2_scope)
     | Atom c1 -> check_cmd_in_scope scope c1
-    | _ -> ()
   with VariableOutOfScope msg ->
     raise (VariableOutOfScope (msg ^ " in " ^ (string_of_cmd c)))
 

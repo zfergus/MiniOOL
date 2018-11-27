@@ -1,36 +1,39 @@
 (** Main cmd-line interface for MiniOOL
     @author Zachary Ferguson *)
 open Parsing;;
-(* print_endline "MiniOOL (Fall 2018)\n\n";; *)
 
-print_endline "
-\027[36;1m ╭─╮╭─╮╭─╮      ╭─╮\027[0m\027[31;1m╭────╮\027[0m\027[32;1m╭────╮\027[0m\027[35;1m╭─╮  \027[0m ┃ Type \"\\help\" for help
-\027[36;1m │    │╰─╯╭────╮╰─╯\027[0m\027[31;1m│ ╭╮ │\027[0m\027[32;1m│ ╭╮ │\027[0m\027[35;1m│ │  \027[0m ┃ Type \"\\exit\" or press Ctrl-D to exit
-\027[36;1m │ ╭╮ │╭─╮│ ╭╮ │╭─╮\027[0m\027[31;1m│ ││ │\027[0m\027[32;1m│ ││ │\027[0m\027[35;1m│ │  \027[0m ┃ Honors Programming Languages
-\027[36;1m │ ││ ││ ││ ││ ││ │\027[0m\027[31;1m│ ╰╯ │\027[0m\027[32;1m│ ╰╯ │\027[0m\027[35;1m│ ╰─╮\027[0m ┃ Version Fall 2018
-\027[36;1m ╰─╯╰─╯╰─╯╰─╯╰─╯╰─╯\027[0m\027[31;1m╰────╯\027[0m\027[32;1m╰────╯\027[0m\027[35;1m╰───╯\027[0m ┃ Created by Zachary Ferguson
-";;
-
+(** Parse command-line arguments. *)
 Arg.parse
   [("--verbose",
     Arg.Unit (fun () -> Flags.verbose := true),
     "Verbosly print steps of interpretation.");
-   ("-verbose",
-    Arg.Unit (fun () -> Flags.verbose := true),
-    "Verbosly print steps of interpretation.")]
+   ("--quite",
+    Arg.Unit (fun () -> Flags.quite := true;),
+    "Only print the input and results.");]
   (fun s -> ())
-  "\nUsage: MiniOOL [--verbose] [-help|--help]";;
-(* Flags.verbose := false;; *)
+  "\nUsage: MiniOOL [--verbose] [--quite] [-help|--help]";;
 
+(** Optionally print logo and information. *)
+if not !(Flags.quite) then
+  print_endline "
+\027[36;1m ╭─╮╭─╮╭─╮      ╭─╮\027[0m\027[31;1m╭────╮\027[0m\027[32;1m╭────╮\027[0m\027[35;1m╭─╮  \027[0m │ Type \"\\help\" for help
+\027[36;1m │    │╰─╯╭────╮╰─╯\027[0m\027[31;1m│ ╭╮ │\027[0m\027[32;1m│ ╭╮ │\027[0m\027[35;1m│ │  \027[0m │ Type \"\\exit\" or press Ctrl-D to exit
+\027[36;1m │ ╭╮ │╭─╮│ ╭╮ │╭─╮\027[0m\027[31;1m│ ││ │\027[0m\027[32;1m│ ││ │\027[0m\027[35;1m│ │  \027[0m │ Honors Programming Languages
+\027[36;1m │ ││ ││ ││ ││ ││ │\027[0m\027[31;1m│ ╰╯ │\027[0m\027[32;1m│ ╰╯ │\027[0m\027[35;1m│ ╰─╮\027[0m │ Version Fall 2018
+\027[36;1m ╰─╯╰─╯╰─╯╰─╯╰─╯╰─╯\027[0m\027[31;1m╰────╯\027[0m\027[32;1m╰────╯\027[0m\027[35;1m╰───╯\027[0m │ Created by Zachary Ferguson
+";;
+
+Random.self_init();;
+
+(** Map Ctrl-C to an exception. *)
 exception SigIntError;;
-
 Sys.set_signal Sys.sigint
   (Sys.Signal_handle (fun _signum -> raise SigIntError));;
 
 try
-  let lexbuf = Lexing.from_channel stdin (* Parse from the standard input *)
+  let lexbuf = Lexing.from_channel stdin (** Parse from the standard input *)
   and err_str = "\027[31;1mError\027[0m: " in (* Colored "Error: " *)
-  while true do (* Loop until end of file (^D) *)
+  while true do (** Loop until end of file (Ctrl-D) *)
     (try
        Printf.printf "# %!"; (* Print the prompt # *)
        (* Parse the standard input *)

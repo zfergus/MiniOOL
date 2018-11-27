@@ -42,7 +42,7 @@ let add_empty_line line prefix mkr =
     @param mkr The depth marker for the current line
     @return the prefix appended with the marker string for the current layer. *)
 let mkr_to_prev_line_prefix prefix mkr = prefix ^ string_of_depth_marker (
-    if mkr = UpTurn then None else Down)
+    if mkr = UpTurn then None else Down);;
 
 
 (** Get the next line's prefix based on the current depth marker.
@@ -50,27 +50,7 @@ let mkr_to_prev_line_prefix prefix mkr = prefix ^ string_of_depth_marker (
     @param mkr The depth marker for the current line
     @return the prefix appended with the marker string for the current layer. *)
 let mkr_to_next_line_prefix prefix mkr = prefix ^ string_of_depth_marker (
-    if mkr = Branch || mkr = UpTurn then Down else None)
-
-
-(** Create a string of the field as string representation of a tree.
-    @param id The field to stringify.
-    @param prefix The prefix for the line to include other layers.
-    @param mkr The depth marker for how the node should be added.
-    @return field as string representation of a tree. *)
-let rec tree_string_of_field id prefix mkr =
-  let prev_line_prefix = mkr_to_prev_line_prefix prefix mkr
-  and next_line_prefix = mkr_to_next_line_prefix prefix mkr
-  and new_prefix = prefix ^ (string_of_depth_marker mkr) in
-  match id with
-  | TerminalField (x, f) ->
-    (tree_string_of_expr (Ident x) prev_line_prefix UpTurn) ^ "\n" ^
-    new_prefix ^ "(.)\n" ^
-    (tree_string_of_expr (Ident (ref f)) next_line_prefix DownTurn)
-  | RecursiveField (id', f) ->
-    (tree_string_of_field id' prev_line_prefix UpTurn) ^ "\n" ^
-    new_prefix ^ "(.)\n" ^
-    (tree_string_of_expr (Ident (ref f)) next_line_prefix DownTurn)
+    if mkr = Branch || mkr = UpTurn then Down else None);;
 
 
 (** Create a string of an boolean expression as string representation of a tree.
@@ -78,7 +58,7 @@ let rec tree_string_of_field id prefix mkr =
     @param prefix The prefix for the line to include other layers.
     @param mkr The depth marker for how the node should be added.
     @return boolean expression as string representation of a tree. *)
-and tree_string_of_bool_expr b prefix mkr =
+let rec tree_string_of_bool_expr b prefix mkr =
   let prev_line_prefix = mkr_to_prev_line_prefix prefix mkr
   and next_line_prefix = mkr_to_next_line_prefix prefix mkr
   and new_prefix = prefix ^ (string_of_depth_marker mkr) in
@@ -107,21 +87,26 @@ and tree_string_of_expr e prefix mkr =
   and next_line_prefix = mkr_to_next_line_prefix prefix mkr
   and new_prefix = prefix ^ (string_of_depth_marker mkr) in
   match e with
-  | Num n -> new_prefix ^ Printf.sprintf "(%d)" n
-  | Null -> new_prefix ^ "(null)"
-  | Ident x -> Printf.sprintf "%s(%s)" new_prefix !x
-  | FieldAccess f -> tree_string_of_field f prefix mkr
+  | Field f -> Printf.sprintf "%s(%s)" new_prefix f
+  | Num n -> Printf.sprintf "%s(%d)" new_prefix n
   | BinaryArithmeticOperator (op, e1, e2) ->
-    (tree_string_of_expr e1 prev_line_prefix UpTurn) ^ "\n" ^
-    new_prefix ^ (Printf.sprintf "(%s)\n" (string_of_arithmetic_op e)) ^
-    (tree_string_of_expr e2 next_line_prefix DownTurn)
+    Printf.sprintf "%s\n%s(%s)\n%s"
+      (tree_string_of_expr e1 prev_line_prefix UpTurn)
+      new_prefix (string_of_arithmetic_op e)
+      (tree_string_of_expr e2 next_line_prefix DownTurn)
   | UnaryArithmeticOperator (op, e1) ->
-    new_prefix ^ (Printf.sprintf "(%s)\n" (string_of_arithmetic_op e)) ^
-    (tree_string_of_expr e1 next_line_prefix DownTurn)
+    Printf.sprintf "%s(%s)\n%s" new_prefix (string_of_arithmetic_op e)
+      (tree_string_of_expr e1 next_line_prefix DownTurn)
+  | Null -> Printf.sprintf "%s(null)" new_prefix
+  | Variable x -> Printf.sprintf "%s(%s)" new_prefix !x
+  | FieldAccess (e1, e2) ->
+    Printf.sprintf "%s\n%s(.)\n%s"
+      (tree_string_of_expr e1 prev_line_prefix UpTurn)
+      new_prefix (tree_string_of_expr e2 next_line_prefix DownTurn)
   | Procedure (y, c) ->
-    new_prefix ^ "(proc)\n" ^
-    (tree_string_of_expr (Ident y) next_line_prefix Branch) ^ "\n" ^
-    (tree_string_of_cmd c  next_line_prefix DownTurn)
+    Printf.sprintf "%s(proc)\n%s\n%s" new_prefix
+      (tree_string_of_expr (Variable y) next_line_prefix Branch)
+      (tree_string_of_cmd c  next_line_prefix DownTurn)
 
 
 (** Create a string of a command as string representation of a tree.
@@ -135,46 +120,43 @@ and tree_string_of_cmd c prefix mkr =
   and new_prefix = prefix ^ (string_of_depth_marker mkr) in
   match c with
   | Declare x ->
-    new_prefix ^ "(var)\n" ^
-    (tree_string_of_expr (Ident x) next_line_prefix DownTurn)
+    Printf.sprintf "%s(var)\n%s"
+      new_prefix (tree_string_of_expr (Variable x) next_line_prefix DownTurn)
   | ProceduceCall (p, y) ->
-    new_prefix ^ "(ProceduceCall)\n" ^
-    (tree_string_of_expr p next_line_prefix Branch) ^ "\n" ^
-    (tree_string_of_expr y next_line_prefix DownTurn)
-  | MallocVar   x  ->
-    new_prefix ^ "(malloc)\n" ^
-    (tree_string_of_expr (Ident x) next_line_prefix DownTurn)
-  | MallocField xf ->
-    new_prefix ^ "(malloc)\n" ^
-    (tree_string_of_field xf next_line_prefix DownTurn)
+    Printf.sprintf "%s(ProceduceCall)\n%s\n%s" new_prefix
+      (tree_string_of_expr p next_line_prefix Branch)
+      (tree_string_of_expr y next_line_prefix DownTurn)
+  | Malloc x  ->
+    Printf.sprintf "%s(malloc)\n%s" new_prefix
+      (tree_string_of_expr (Variable x) next_line_prefix DownTurn)
   | Assign (x, e) ->
-    (tree_string_of_expr (Ident x) prev_line_prefix UpTurn) ^ "\n" ^
-    new_prefix ^ "(=)\n" ^
-    (tree_string_of_expr e next_line_prefix DownTurn)
-  | FieldAssign (id, e) ->
-    (tree_string_of_field id prev_line_prefix UpTurn) ^ "\n" ^
-    new_prefix ^ "(=)\n" ^
-    (tree_string_of_expr e next_line_prefix DownTurn)
-  | Skip -> new_prefix ^ "(skip)"
+    Printf.sprintf "%s\n%s(=)\n%s"
+      (tree_string_of_expr (Variable x) prev_line_prefix UpTurn)
+      new_prefix (tree_string_of_expr e next_line_prefix DownTurn)
+  | FieldAssign (e1, e2, e3) ->
+    Printf.sprintf "%s\n%s(=)\n%s"
+      (tree_string_of_expr (FieldAccess (e1, e2)) prev_line_prefix UpTurn)
+      new_prefix (tree_string_of_expr e3 next_line_prefix DownTurn)
+  | Skip -> Printf.sprintf "%s(skip)" new_prefix
   | CmdSequence cs ->
-    new_prefix ^ "(cmds)\n" ^
-    (tree_string_of_cmds cs next_line_prefix)
+    Printf.sprintf "%s(cmds)\n%s" new_prefix
+      (tree_string_of_cmds cs next_line_prefix)
   | While (b, c) ->
-    new_prefix ^ "(while)\n" ^
-    (tree_string_of_bool_expr b next_line_prefix Branch) ^ "\n" ^
-    (tree_string_of_cmd c next_line_prefix DownTurn)
+    Printf.sprintf "%s(while)\n%s\n%s" new_prefix
+      (tree_string_of_bool_expr b next_line_prefix Branch)
+      (tree_string_of_cmd c next_line_prefix DownTurn)
   | IfElse (b, c1, c2) ->
-    new_prefix ^ "(ifelse)\n" ^
-    (tree_string_of_bool_expr b next_line_prefix Branch) ^ " \n" ^
-    (tree_string_of_cmd c1 next_line_prefix Branch) ^ "\n" ^
-    (tree_string_of_cmd c2 next_line_prefix DownTurn)
+    Printf.sprintf "%s(ifelse)\n%s\n%s\n%s" new_prefix
+      (tree_string_of_bool_expr b next_line_prefix Branch)
+      (tree_string_of_cmd c1 next_line_prefix Branch)
+      (tree_string_of_cmd c2 next_line_prefix DownTurn)
   | Parallel (c1, c2) ->
-    (tree_string_of_cmd c1 prev_line_prefix UpTurn) ^ "\n" ^
-    new_prefix ^ "(|||)\n" ^
-    (tree_string_of_cmd c2 next_line_prefix DownTurn)
+    Printf.sprintf "%s\n%s(|||)\n%s"
+      (tree_string_of_cmd c1 prev_line_prefix UpTurn)
+      new_prefix (tree_string_of_cmd c2 next_line_prefix DownTurn)
   | Atom c ->
-    new_prefix ^ "(atom)\n" ^
-    (tree_string_of_cmd c next_line_prefix DownTurn)
+    Printf.sprintf "%s(atom)\n%s" new_prefix (
+      tree_string_of_cmd c next_line_prefix DownTurn)
 
 
 (** Create a string of commands as string representation of a tree.

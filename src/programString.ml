@@ -4,14 +4,6 @@
 open AbstractSyntaxTree;;
 
 
-(** Create a string of the field.
-    @param f The field to stringify.
-    @return a string representation of the field. *)
-let rec string_of_field id = Printf.sprintf "(%s)" (match id with
-    | TerminalField (x, f) -> !x ^ "." ^ f
-    | RecursiveField (id', f) -> (string_of_field id') ^ "." ^ f);;
-
-
 (** Create a string of the arithmetic operator.
     @param e UnaryArithmeticOperator or BinaryArithmeticOperator expresion.
     @return a string representation of the operator. *)
@@ -67,15 +59,17 @@ let rec string_of_bool_expr b = match b with
     @param e Expresion to stringify.
     @return a string representation of the expression. *)
 and string_of_expr e = match e with
+  | Field f -> f
   | Num n -> string_of_int n
-  | Null -> "null"
-  | Ident x -> !x
   | BinaryArithmeticOperator (op, e1, e2) ->
     Printf.sprintf "(%s %s %s)" (string_of_expr e1) (string_of_arithmetic_op e)
       (string_of_expr e2)
   | UnaryArithmeticOperator (op, e1) ->
     Printf.sprintf "(%s%s)" (string_of_arithmetic_op e) (string_of_expr e1)
-  | FieldAccess id -> Printf.sprintf "(%s)" (string_of_field id)
+  | Null -> "null"
+  | Variable x -> !x
+  | FieldAccess (e1, e2) ->
+    Printf.sprintf "(%s.%s)" (string_of_expr e1) (string_of_expr e2)
   | Procedure (y, c) ->
     Printf.sprintf "(proc %s: %s)" !y (string_of_cmd c)
 
@@ -87,11 +81,11 @@ and string_of_cmd c = match c with
   | Declare x -> Printf.sprintf "{var %s}" !x
   | ProceduceCall (p, y) ->
     Printf.sprintf "{%s(%s)}" (string_of_expr p) (string_of_expr y)
-  | MallocVar   x  -> Printf.sprintf "{malloc(%s)}" !x
-  | MallocField xf -> Printf.sprintf "{malloc(%s)}" (string_of_field xf)
+  | Malloc x  -> Printf.sprintf "{malloc(%s)}" !x
+  (* | MallocField xf -> Printf.sprintf "{malloc(%s)}" (string_of_field xf) *)
   | Assign (x, e) -> Printf.sprintf "{%s = %s}" !x (string_of_expr e)
-  | FieldAssign (id, e) ->
-    Printf.sprintf "{%s = %s}" (string_of_field id) (string_of_expr e)
+  | FieldAssign (e1, e2, e3) ->
+    Printf.sprintf "{%s.%s = %s}" (string_of_expr e1) (string_of_expr e2) (string_of_expr e3)
   | Skip -> "{skip}"
   | CmdSequence cs -> Printf.sprintf "{%s}" (string_of_cmds cs)
   | While (b, c) ->

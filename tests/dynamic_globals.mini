@@ -1,0 +1,1 @@
+var r; var p; p = proc y: r = y+h; h=2; p(4);

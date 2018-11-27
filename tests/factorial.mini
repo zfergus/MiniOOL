@@ -1,0 +1,11 @@
+var r;
+var factorial;
+factorial = proc i:
+    if (i <= 0) {
+        r = 1;
+    } else {
+        factorial(i - 1);
+        r = i * r;
+    };
+factorial(17);
+r = 355687428096000 - r

@@ -51,6 +51,6 @@ rule token = parse
   | "|||"                   {PARALLEL}
   | "atom"                  {ATOM}
   | ['0'-'9']+ as num       {NUM (int_of_string num)}
-  | (['a'-'z'] | ['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')* as id
-               {IDENT id}
+  | (['a'-'z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')* as x {VARIABLE x}
+  | (['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')* as f {FIELD f}
   | _ as c {raise (Error (Printf.sprintf "unexpected character: %c" c)) }

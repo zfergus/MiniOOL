@@ -1,0 +1,11 @@
+var r;
+var sum;
+sum = proc x: {
+    r = proc y: {
+        r = x + y;
+    };
+};
+var x; x = 100;
+var y; y = -100;
+sum(x);
+r(y);

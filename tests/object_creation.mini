@@ -1,0 +1,6 @@
+var x; malloc(x);
+x.C = 0;
+x.F = proc y:if y < 1 then x.R = x.C else x.F(y - 1);
+x.F(2);
+var r;
+r = x.R;

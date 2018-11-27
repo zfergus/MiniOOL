@@ -19,18 +19,28 @@
     C ∈ Ctrl ::= skip | {Ctrl; Ctrl} | while b Ctrl | Control
     if b Ctrl else Ctrl | {Ctrl 9 Ctrl} | atom(Ctrl) |
     block(Ctrl)
-    Γ = ⟨C, σ⟩/σ ∈ Conf ≜ (Ctrl × State) ∪ State ∪ {error}
-*)
+    Γ = ⟨C, σ⟩/σ ∈ Conf ≜ (Ctrl × State) ∪ State ∪ {error}*)
 
+type obj = int;;
 
-type tainted_value = Int of int
-                   | Object of (string, tainted_value) Hashtbl.t
-                   | Null
-                   | Closure of AbstractSyntaxTree.ident * AbstractSyntaxTree.cmd * stack
-                   | Error of string
+type closure = {param : AbstractSyntaxTree.ident; body : AbstractSyntaxTree.cmd; call_stack : stack}
 
+and tainted_value =
+  | Field of string
+  | Int of int
+  | Object of obj
+  | Null
+  | Closure of closure ref
+  | Error of string
+  (* and environment = (AbstractSyntaxTree.ident, int) Hashtbl.t
+     and frame = Decl of environment | Call of environment * stack
+     and stack = frame list;; *)
 (* and tainted_value = Value of value | Error of string *)
 
-and stack = (string, int) Hashtbl.t
+and stack = (string, obj) Hashtbl.t;;
 
-and heap = (int, tainted_value) Hashtbl.t;;
+type heap = (obj * string, tainted_value) Hashtbl.t;;
+
+(* type state = state * heap;; *)
+
+(* type ctrl = Cmd of AbstractSyntaxTree.cmd | Block of ctrl;; *)

@@ -1,0 +1,20 @@
+var r;
+var fibonacci;
+fibonacci = proc n: {
+    if (n <= 0) {
+        r = 0;
+    } else {
+        if (n == 1) {
+            r = 1;
+        } else {
+            fibonacci(n - 1);
+            var tmp;
+            tmp = r;
+            fibonacci(n - 2);
+            r = tmp + r;
+        }
+    };
+};
+var n; n = 17;
+fibonacci(n);
+r = 1597 - r;

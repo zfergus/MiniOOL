@@ -5,8 +5,9 @@
 CFLAGS = -g
 
 SDIR = src
-DDIR = doc
+DDIR = docs
 ODIR = bin
+TDIR = tests
 _OBJ_PARSER = flags.cmx abstractSyntaxTree.cmx programString.cmx \
 abstractSyntaxTreeString.cmx staticSemantics.cmx semanticDomains.cmx \
 operationalSemantics.cmx lexer.cmx
@@ -43,7 +44,7 @@ MiniOOL: $(ODIR)/MiniOOL_raw
 # Link all compiled files together
 $(ODIR)/MiniOOL_raw: $(OBJ)
 	@echo "\033[1;32mLinking the lexer, parser, and interpreter\033[0m"
-	ocamlopt -o $@ $^ $(CFLAGS)
+	ocamlopt -o $@ str.cmxa $^ $(CFLAGS)
 	@echo ""
 
 # Lexer
@@ -91,3 +92,7 @@ docs:
 clean:
 	@echo "\033[1;32mCleaning up build files\033[0m"
 	/bin/rm -rf $(ODIR) MiniOOL makefile~
+
+.PHONY: test
+test:
+	/bin/bash $(TDIR)/test.sh
