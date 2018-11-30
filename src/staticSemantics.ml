@@ -4,9 +4,6 @@
 open AbstractSyntaxTree;;
 open ProgramString;;
 
-let print_warning warning =
-  Printf.fprintf stderr "\027[33;1mWarning\027[0m: %s\n%!" warning;;
-
 (** Exception indicating a variable is out of scope. *)
 exception VariableOutOfScope of string;;
 
@@ -23,7 +20,9 @@ let rec subscript_string_of_int n =
 
 (** Record type of the count an ident has be declared and the current ident in
     scope. *)
-type scope_rec = {mutable count: int; mutable current: int};;
+type scope_rec = {mutable count: int;
+                  mutable current: int;
+                  mutable global_declared: bool};;
 
 
 (** Add a ident to the hash table of idents.
@@ -31,7 +30,8 @@ type scope_rec = {mutable count: int; mutable current: int};;
     @param id The identifier to add. *)
 let add_id_to_scope scope id =
   match (Hashtbl.find_opt scope !id) with
-  | None -> Hashtbl.add scope !id {count = 1; current = 0}
+  | None -> Hashtbl.replace scope !id
+              {count = 1; current = 0; global_declared = false}
   | Some r -> r.current <- r.count; r.count <- r.count + 1;
     if r.count == -1 then
       failwith ("Identifier count overflow (identifier " ^ !id ^
@@ -43,7 +43,10 @@ let add_id_to_scope scope id =
     @return the new copy. *)
 let copy_scope scope = let scope' = Hashtbl.create (Hashtbl.length scope) in
   Hashtbl.iter
-    (fun k v -> (Hashtbl.add scope' k {count = v.count; current = v.current}))
+    (fun k v -> (
+         Hashtbl.replace scope' k
+           {count = v.count; current = v.current;
+            global_declared = v.global_declared}))
     scope;
   scope';;
 
@@ -55,9 +58,10 @@ let update_scope scope scope' = (
   Hashtbl.iter (fun k' v' ->
       match (Hashtbl.find_opt scope k') with
       (* Set the current to -1 implying k' is not in scope. *)
-      | None -> Hashtbl.add scope k' {count = v'.count; current = -1}
+      | None -> Hashtbl.replace scope k' {count = v'.count; current = -1;
+                                          global_declared = v'.global_declared}
       (* Increase the count, but the current version remains the same *)
-      | Some v -> v.count <- v'.count)
+      | Some v -> v.count <- v'.count; v.global_declared <- v'.global_declared)
     scope');;
 
 
@@ -85,12 +89,18 @@ let is_id_in_scope scope id =
   match Hashtbl.find_opt scope !id with
   (* Implicitly declare global variables *)
   | None ->
-    print_warning
+    Utils.print_warning
       (Printf.sprintf
          "Undeclared variable \"%s\" implicitly declared as global" !id);
-    Hashtbl.add scope !id {count = 0; current = -1}; true
+    Hashtbl.replace scope !id
+      {count = 0; current = -1; global_declared = true};
+    true
   (* Identifiers are always in scope because they might be global. *)
-  | Some r -> true;;
+  | Some r -> if not r.global_declared && r.current = -1 then (
+      Utils.print_warning (
+        Printf.sprintf
+          "Undeclared variable \"%s\" implicitly declared as global" !id);
+      r.global_declared <- true); true;;
 
 
 (** Checks if id is in the scope of scope.
@@ -202,7 +212,8 @@ let string_of_scope scope =
   let buff = Buffer.create ((Hashtbl.length scope) * 30) in
   Hashtbl.iter (fun k v ->
       Buffer.add_string buff
-        (Printf.sprintf "%s: {count = %d; current = %d}\n"
-           k v.count v.current))
+        (Printf.sprintf
+           "%s: {count = %d; current = %d; global_declared = %s}\n" k v.count
+           v.current (if v.global_declared then "true" else "false")))
     scope;
   Buffer.contents buff;;

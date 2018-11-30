@@ -2,26 +2,21 @@
     @author Zachary Ferguson *)
 open Parsing;;
 
+let show_logo = ref true;;
+
 (** Parse command-line arguments. *)
 Arg.parse
   [("--verbose",
     Arg.Unit (fun () -> Flags.verbose := true),
-    "Verbosly print steps of interpretation.");
-   ("--quite",
-    Arg.Unit (fun () -> Flags.quite := true;),
-    "Only print the input and results.");]
+    "Verbosly print steps of interpretation");
+   ("--no-logo",
+    Arg.Unit (fun () -> show_logo := false),
+    "Do not display the logo and information at start up");]
   (fun s -> ())
   "\nUsage: MiniOOL [--verbose] [--quite] [-help|--help]";;
 
 (** Optionally print logo and information. *)
-if not !(Flags.quite) then
-  print_endline "
-\027[36;1m ╭─╮╭─╮╭─╮      ╭─╮\027[0m\027[31;1m╭────╮\027[0m\027[32;1m╭────╮\027[0m\027[35;1m╭─╮  \027[0m │ Type \"\\help\" for help
-\027[36;1m │    │╰─╯╭────╮╰─╯\027[0m\027[31;1m│ ╭╮ │\027[0m\027[32;1m│ ╭╮ │\027[0m\027[35;1m│ │  \027[0m │ Type \"\\exit\" or press Ctrl-D to exit
-\027[36;1m │ ╭╮ │╭─╮│ ╭╮ │╭─╮\027[0m\027[31;1m│ ││ │\027[0m\027[32;1m│ ││ │\027[0m\027[35;1m│ │  \027[0m │ Honors Programming Languages
-\027[36;1m │ ││ ││ ││ ││ ││ │\027[0m\027[31;1m│ ╰╯ │\027[0m\027[32;1m│ ╰╯ │\027[0m\027[35;1m│ ╰─╮\027[0m │ Version Fall 2018
-\027[36;1m ╰─╯╰─╯╰─╯╰─╯╰─╯╰─╯\027[0m\027[31;1m╰────╯\027[0m\027[32;1m╰────╯\027[0m\027[35;1m╰───╯\027[0m │ Created by Zachary Ferguson
-";;
+if !show_logo then print_endline Utils.logo;;
 
 Random.self_init();;
 

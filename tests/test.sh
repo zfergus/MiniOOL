@@ -3,7 +3,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 function test_file {
 printf "\e[32;1m$1\n\e[0m"
-printf "$(cat $2 | tr -d '\n')\n" | $DIR/../MiniOOL --quite --verbose
+printf "$(cat $2 | tr -d '\n')\n" | $DIR/../MiniOOL --no-logo --verbose
 printf "\e[33;1mPress anything to continue...\e[0m"
 read -n1 -r -p "" key
 printf "\n"

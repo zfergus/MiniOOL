@@ -71,31 +71,37 @@ and string_of_expr e = match e with
   | FieldAccess (e1, e2) ->
     Printf.sprintf "(%s.%s)" (string_of_expr e1) (string_of_expr e2)
   | Procedure (y, c) ->
-    Printf.sprintf "(proc %s: %s)" !y (string_of_cmd c)
+    Printf.sprintf (match c with | CmdSequence _ -> "proc %s: %s"
+                                 | _ -> "proc %s: {%s}") !y (string_of_cmd c)
 
 
 (** Create a string of the command.
     @param e Command to stringify.
     @return a string representation of the command. *)
 and string_of_cmd c = match c with
-  | Declare x -> Printf.sprintf "{var %s}" !x
+  | Declare x -> Printf.sprintf "var %s" !x
   | ProceduceCall (p, y) ->
-    Printf.sprintf "{%s(%s)}" (string_of_expr p) (string_of_expr y)
-  | Malloc x  -> Printf.sprintf "{malloc(%s)}" !x
+    Printf.sprintf "%s(%s)" (string_of_expr p) (string_of_expr y)
+  | Malloc x  -> Printf.sprintf "malloc(%s)" !x
   (* | MallocField xf -> Printf.sprintf "{malloc(%s)}" (string_of_field xf) *)
-  | Assign (x, e) -> Printf.sprintf "{%s = %s}" !x (string_of_expr e)
+  | Assign (x, e) -> Printf.sprintf "%s = %s" !x (string_of_expr e)
   | FieldAssign (e1, e2, e3) ->
-    Printf.sprintf "{%s.%s = %s}" (string_of_expr e1) (string_of_expr e2) (string_of_expr e3)
-  | Skip -> "{skip}"
+    Printf.sprintf "%s.%s = %s" (string_of_expr e1) (string_of_expr e2) (string_of_expr e3)
+  | Skip -> "skip"
   | CmdSequence cs -> Printf.sprintf "{%s}" (string_of_cmds cs)
-  | While (b, c) ->
-    Printf.sprintf "{while %s %s}" (string_of_bool_expr b) (string_of_cmd c)
+  | While (b, c) -> Printf.sprintf (match c with
+      | CmdSequence _ -> "while %s %s"
+      | _ -> "while %s {%s}") (string_of_bool_expr b) (string_of_cmd c)
   | IfElse (b, c1, c2) ->
-    Printf.sprintf "{if %s then %s else %s}"
+    Printf.sprintf (match c1, c2 with
+        | CmdSequence _, CmdSequence _ -> "if %s then %s else %s"
+        | CmdSequence _, _ -> "if %s then %s else {%s}"
+        | _, CmdSequence _ -> "if %s then {%s} else %s"
+        | _, _ -> "if %s then {%s} else {%s}")
       (string_of_bool_expr b) (string_of_cmd c1) (string_of_cmd c2)
   | Parallel (c1, c2) ->
     Printf.sprintf "{%s ||| %s}" (string_of_cmd c1) (string_of_cmd c2)
-  | Atom c -> Printf.sprintf "{atom(%s)}" (string_of_cmd c)
+  | Atom c -> Printf.sprintf "atom(%s)" (string_of_cmd c)
 
 
 (** Create a string of the commands.

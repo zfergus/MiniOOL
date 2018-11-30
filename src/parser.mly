@@ -29,7 +29,7 @@ let run_program ast =
   (* Should the abstract syntax tree be printed? *)
   if !(Flags.verbose) then
     ((* Printf.printf "\nScope:\n%s\n%!" (string_of_scope scope); *)
-      Printf.printf "Abstract Syntax Tree:\n%s\n\n%!" (tree_string_of_cmds ast ""));
+      Printf.printf "\nAbstract Syntax Tree:\n%s\n\n%!" (tree_string_of_cmds ast ""));
   (* Evaluate the input. *)
   eval_cmds ast stack' heap';
   (* Print the values on the top of the stack. *)
@@ -47,11 +47,11 @@ let do_directive dir =
   | "clear" -> Hashtbl.clear !scope; Hashtbl.clear !stack; Hashtbl.clear !heap;
     Printf.printf "Stack and heap cleared\n%!"
   (** "help" -> printing the help string for MiniOOL *)
-  | "help" -> print_string ("MiniOOL (Fall 2018)\n" ^
-                            "Honors Programming Languages\n"^
-                            "Created by Zachary Ferguson\n")
+  | "help" -> print_endline (Utils.logo ^ Utils.help)
   (** "exit" | "quit" -> exit MiniOOL *)
   | "exit" | "quit" -> raise Lexer.Eof
+  | "verbose" -> Flags.verbose := true
+  | "quite" -> Flags.verbose := false
   (** _ -> fail because of an unknown directive *)
   | _ -> failwith (Printf.sprintf "Unknown directive \"%s\"" dir);;
 %} (* declarations *)

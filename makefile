@@ -8,7 +8,7 @@ SDIR = src
 DDIR = docs
 ODIR = bin
 TDIR = tests
-_OBJ_PARSER = flags.cmx abstractSyntaxTree.cmx programString.cmx \
+_OBJ_PARSER = utils.cmx flags.cmx abstractSyntaxTree.cmx programString.cmx \
 abstractSyntaxTreeString.cmx staticSemantics.cmx semanticDomains.cmx \
 operationalSemantics.cmx lexer.cmx
 _OBJ = $(_OBJ_PARSER) parser.cmx MiniOOL.cmx
@@ -16,7 +16,7 @@ OBJ_PARSER = $(patsubst %,$(ODIR)/%,$(_OBJ_PARSER))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-_DEPS = flags.ml abstractSyntaxTree.ml programString.ml \
+_DEPS = utils.ml flags.ml abstractSyntaxTree.ml programString.ml \
 abstractSyntaxTreeString.ml staticSemantics.ml semanticDomains.ml \
 operationalSemantics.ml lexer.ml
 DEPS = $(patsubst %,$(SDIR)/%,$(_DEPS))
@@ -37,7 +37,10 @@ $(ODIR):
 # Wrap MiniOOL_raw with rlwrap so it has a history and arrow key usage
 MiniOOL: $(ODIR)/MiniOOL_raw
 	@echo "\033[1;32mCreating a script to wrap MiniOOL with rlwrap\033[0m"
-	printf "#!/bin/bash\nrlwrap ./$(ODIR)/MiniOOL_raw \"$$%s\"" "@" > MiniOOL
+	# printf "#!/bin/bash\nrlwrap ./$(ODIR)/MiniOOL_raw \"$$%s\"" "@" > MiniOOL
+	printf "#!/bin/bash\nif hash rlwrap 2>/dev/null; then\n    rlwrap \
+./bin/MiniOOL_raw \"$$%s\"\nelse\n    ./bin/MiniOOL_raw \"$$%s\"\nfi" \
+	"@" "@" > MiniOOL
 	chmod +x MiniOOL
 	@echo ""
 
@@ -71,7 +74,7 @@ $(ODIR)/parser.cmx: $(ODIR)/parser.ml $(OBJ_PARSER)
 	ocamlopt -c -o $@ -I $(ODIR) $< $(CFLAGS)
 	@echo ""
 
-$(ODIR)/MiniOOL.cmx: $(SDIR)/MiniOOL.ml $(SDIR)/flags.ml $(ODIR)/parser.cmx
+$(ODIR)/MiniOOL.cmx: $(SDIR)/MiniOOL.ml $(SDIR)/utils.ml $(SDIR)/flags.ml $(ODIR)/parser.cmx
 	@echo "\033[1;32mCompiling the MiniOOL.ml\033[0m"
 	ocamlopt -c -o $@ -I $(ODIR) $< $(CFLAGS)
 	@echo ""
@@ -94,5 +97,5 @@ clean:
 	/bin/rm -rf $(ODIR) MiniOOL makefile~
 
 .PHONY: test
-test:
+test: all
 	/bin/bash $(TDIR)/test.sh
