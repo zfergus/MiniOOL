@@ -116,7 +116,7 @@ var r;
 r = x.R;
 ```
 
-The resulting value of r is 0.
+The resulting value of `r` is 0.
 
 ### Currying Parameters (`curry.mini`)
 
@@ -141,4 +141,4 @@ sum(x);
 r(y);
 ```
 
-The resulting value of r is 0.
+The resulting value of `r` is 0.
