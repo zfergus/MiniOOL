@@ -68,7 +68,14 @@ let update_value_of_ident x value' s h =
   | None -> Hashtbl.replace h (global_loc, !x) value';;
 
 
-let gen_field_access_error_message e1 e2 v1 v2 =
+(** Generate a unqiue error message for accessing fields based on the tainted
+    value types.
+    @param e1 Expression one in e1.e2.
+    @param v1 The tainted value of e1.
+    @param e2 Expression two in e1.e2.
+    @param v2 The tainted value of e2.
+    @return an error message specific to e1.e2 with values v1.v2. *)
+let gen_field_access_error_message e1 v1 e2 v2 =
   let e1_str = string_of_expr e1 and e2_str = string_of_expr e2 in
   match v1, v2 with
   | Null, _ -> Printf.sprintf "Expression %s has a value of null in %s.%s"
@@ -78,8 +85,8 @@ let gen_field_access_error_message e1 e2 v1 v2 =
       e2_str e1_str e2_str
   | Error msg1, Error msg2 -> msg1 ^ " and " ^ msg2
   | Error msg, _ | _, Error msg -> msg
-  | _, Field f ->  Printf.sprintf "Expression %s is not an object in %s.%s"
-                     e1_str e1_str e2_str
+  | _, Field f -> Printf.sprintf "Expression %s is not an object in %s.%s"
+                    e1_str e1_str e2_str
   | _, _ ->
     Printf.sprintf
       "Expression %s is not an object and expression %s is not a field in %s.%s"
@@ -123,7 +130,7 @@ let rec eval_expr e s h = match e with
       | Object obj, Field f -> (match Hashtbl.find_opt h (obj, f) with
           | Some f_val -> f_val
           | None -> Null)
-      | _, _ -> Error (gen_field_access_error_message e1 e2 v1 v2))
+      | _, _ -> Error (gen_field_access_error_message e1 v1 e2 v2))
   (* Create a closure of the current stack. *)
   | Procedure (y, c) ->
     Closure (ref {param = y; body = c; call_stack = (Hashtbl.copy s)})
@@ -205,7 +212,7 @@ and eval_cmd c s h = match c with
   | FieldAssign (e1, e2, e3) ->
     let v1 = eval_expr e1 s h and v2 = eval_expr e2 s h in (match v1, v2 with
       | Object obj, Field f -> Hashtbl.replace h (obj, f) (eval_expr e3 s h); []
-      | _, _ -> failwith (gen_field_access_error_message e1 e2 v1 v2))
+      | _, _ -> failwith (gen_field_access_error_message e1 v1 e2 v2))
   | Skip -> []
   (* Evaluate the first command and return the resulting commands, if any,
      prepended to the rest of the command sequence. *)

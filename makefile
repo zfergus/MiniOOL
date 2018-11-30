@@ -47,7 +47,7 @@ MiniOOL: $(ODIR)/MiniOOL_raw
 # Link all compiled files together
 $(ODIR)/MiniOOL_raw: $(OBJ)
 	@echo "\033[1;32mLinking the lexer, parser, and interpreter\033[0m"
-	ocamlopt -o $@ str.cmxa $^ $(CFLAGS)
+	ocamlopt -o $@ $^ $(CFLAGS)
 	@echo ""
 
 # Lexer

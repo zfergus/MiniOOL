@@ -13,7 +13,7 @@ Arg.parse
     Arg.Unit (fun () -> show_logo := false),
     "Do not display the logo and information at start up");]
   (fun s -> ())
-  "\nUsage: MiniOOL [--verbose] [--quite] [-help|--help]";;
+  "\nUsage: MiniOOL [--verbose] [--no-logo] [-help|--help]";;
 
 (** Optionally print logo and information. *)
 if !show_logo then print_endline Utils.logo;;

@@ -207,7 +207,8 @@ and check_cmds_in_scope scope ast =
   | [] -> ()
   | h :: t -> check_cmd_in_scope scope h; check_cmds_in_scope scope t;;
 
-(** Print the entrys of the scope Hashtbl. *)
+(** Print the entrys of the scope Hashtbl.
+    @param scope Scope to stringify. *)
 let string_of_scope scope =
   let buff = Buffer.create ((Hashtbl.length scope) * 30) in
   Hashtbl.iter (fun k v ->
