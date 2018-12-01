@@ -7,7 +7,7 @@ CFLAGS = -g
 SDIR = src
 DDIR = docs
 ODIR = bin
-TDIR = tests
+EDIR = examples
 _OBJ_PARSER = utils.cmx flags.cmx abstractSyntaxTree.cmx programString.cmx \
 abstractSyntaxTreeString.cmx staticSemantics.cmx semanticDomains.cmx \
 operationalSemantics.cmx lexer.cmx
@@ -96,6 +96,6 @@ clean:
 	@echo "\033[1;32mCleaning up build files\033[0m"
 	/bin/rm -rf $(ODIR) MiniOOL makefile~
 
-.PHONY: test
-test: all
-	/bin/bash $(TDIR)/test.sh
+.PHONY: examples
+examples: all
+	/bin/bash $(EDIR)/run_examples.sh

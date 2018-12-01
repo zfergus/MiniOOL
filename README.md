@@ -6,8 +6,8 @@ Created by Zachary Ferguson for Honors Programming Languages (Fall 2018).
 ## Building MiniOOL
 
 MiniOOL can be built using the included make file. Run `make` to compile the
-source code and run `make test` to test the build. Optionally `make docs` will
-build the documentation for the source code using `ocamldoc`.
+source code and run `make examples` to run the example programs. Optionally
+`make docs` will build the documentation for the source code using `ocamldoc`.
 
 ### Dependancies
 The only external dependency for MiniOOL is
@@ -80,8 +80,8 @@ printf "$(cat source.mini | tr -d '\n')\n" | ./MiniOOL --no-logo
 
 ## Example Programs
 
-Provided in the `tests/` directory are some example programs for MiniOOL. Run
-all of these examples by using the command `make test`.
+Provided in the `examples/` directory are some example programs for MiniOOL. Run
+all of these examples by using the command `make examples`.
 
 ### Factorial (`factorial.mini`)
 
