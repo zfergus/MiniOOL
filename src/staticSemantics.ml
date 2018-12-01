@@ -1,4 +1,4 @@
-(** Static semantics for MiniOOL
+(** Static semantics for MiniOOL. Checks if an identifier is in scope.
     @author Zachary Ferguson *)
 
 open AbstractSyntaxTree;;
@@ -174,18 +174,23 @@ and check_cmd_in_scope scope c =
     | Skip -> ()
     | CmdSequence cs -> check_cmds_in_scope scope cs
     | While (b, c1) -> let while_scope = copy_scope scope in
+      (* Any variables declared in the while loops are not usable outside. *)
       check_bool_expr_in_scope while_scope b;
       check_cmd_in_scope while_scope c1;
       update_scope scope while_scope
     | IfElse (b, c1, c2) ->
       check_bool_expr_in_scope scope b;
       (let if_scope = copy_scope scope in
+       (* Any variables declared in the if block are not usable outside. *)
        check_cmd_in_scope if_scope c1;
        update_scope scope if_scope);
       (let else_scope = copy_scope scope in
+       (* Any variables declared in the else block are not usable outside. *)
        check_cmd_in_scope else_scope c2;
        update_scope scope else_scope)
     | Parallel (c1, c2) ->
+      (* Any variables declared inside a parallel are not usable after because
+         of the ambigous case: {var x; x = 1 ||| var x; x = 2}. *)
       (let c1_scope = copy_scope scope in
        check_cmd_in_scope c1_scope c1;
        update_scope scope c1_scope);

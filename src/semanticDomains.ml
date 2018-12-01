@@ -1,4 +1,4 @@
-(** Semantic Domains
+(** Type definitions for the semantic domains of MiniOOL.
     @author Zachary Ferguson
 
     Semantic domains:

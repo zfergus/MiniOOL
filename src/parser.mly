@@ -1,6 +1,7 @@
-(** Parser for MiniOOL. Takes the tokens from the lexer and builds an abstract
-    syntax tree for of the input program. Runs the input program by checking
-    the scope, uniquely renaming vairables, and evaluating the commands.
+(** Menhir parser for MiniOOL. Takes the tokens from the lexer and builds an
+    abstract syntax tree for of the input program. Runs the input program by
+    checking the scope, uniquely renaming vairables, and evaluating the
+    commands.
     @author Zachary Ferguson *)
 
 %{ (* header *)
@@ -111,7 +112,7 @@ cmd:
   (* IfElse statements can optionally have a "then" after the conditional. *)
   | IF b = bool_expr c1 = cmd ELSE c2 = cmd         {IfElse (b, c1, c2)}
   | IF b = bool_expr THEN c1 = cmd ELSE c2 = cmd    {IfElse (b, c1, c2)}
-  | LBRACE c1 = cmd PARALLEL c2 = cmd RBRACE        {Parallel (c1, c2)}
+  | LBRACE c1 = cmds PARALLEL c2 = cmds RBRACE      {Parallel (CmdSequence c1, CmdSequence c2)}
   | ATOM LPAREN cs = cmds RPAREN                    {Atom (CmdSequence cs)}
 
 (* A bool_expr is a boolean expression as defined in the

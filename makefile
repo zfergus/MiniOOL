@@ -85,7 +85,7 @@ $(ODIR)/%.cmx: $(SDIR)/%.ml
 	@echo ""
 
 .PHONY: docs
-docs:
+docs: all
 	@echo "\033[1;32mCreating documentation files\033[0m"
 	mkdir -p $(DDIR)
 	ocamldoc -html -charset "utf-8" -I $(ODIR) -d $(DDIR) $(SDIR)/*.ml $(ODIR)/*.ml

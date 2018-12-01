@@ -1,4 +1,4 @@
-(** Abstract syntax tree type for MiniOOL.
+(** Abstract syntax tree types for MiniOOL.
     @author Zachary Ferguson *)
 
 (** Identifiers: Reference to a string so the ident can be uniqified by the

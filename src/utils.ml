@@ -1,4 +1,4 @@
-(** Utilities for for MiniOOL
+(** Utilities for for MiniOOL.
     @author Zachary Ferguson *)
 
 
@@ -57,7 +57,7 @@ Boolean Expressions:
    | b₀ or b₁
 
 Interpreter Directives:
- • \\exit | \\quit  (exit MiniOOL)
+ • \\exit | \\quit   (exit MiniOOL)
  • \\help:          (display helpful information about and how to use MiniOOL)
  • \\clear:         (clear the stack and heap of all values (this will also
                      reset the unique naming of variables))

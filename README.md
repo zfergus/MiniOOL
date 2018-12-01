@@ -142,3 +142,26 @@ r(y);
 ```
 
 The resulting value of `r` is 0.
+
+## Source files
+
+All of the source code for MiniOOL is written in OCaml and can be found in the
+`src` directory.
+
+* `MiniOOL.ml`: Main cmd-line interface for MiniOOL
+* `lexer.mll`: Lexer tokens and regular expressions for MiniOOL.
+* `parser.mly`: Menhir parser for MiniOOL. Takes the tokens from the lexer and
+builds an abstract syntax tree for of the input program. Runs the input program
+by checking the scope, uniquely renaming vairables, and evaluating the commands.
+* `abstractSyntaxTree.ml`: Abstract syntax tree types for MiniOOL.
+* `abstractSyntaxTreeString.ml`: Create a string of a tree of the abstract
+syntax tree types for MiniOOL.
+* `programString.ml`: Create a string of of the abstract syntax tree types for
+MiniOOL.
+* `staticSemantics.ml`: Static semantics for MiniOOL. Checks if an identifier
+is in scope.
+* `semanticDomains.ml`: Type definitions for the semantic domains of MiniOOL.
+* `operationalSemantics.ml`: Evaluate the abstract syntax tree of a MiniOOL
+program.
+* `flags.ml`: Global flags for different options.
+* `utils.ml`: Utilities for for MiniOOL

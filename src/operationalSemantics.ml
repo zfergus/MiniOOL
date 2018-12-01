@@ -1,4 +1,4 @@
-(** Evaluate the abstract syntax tree.
+(** Evaluate the abstract syntax tree of a MiniOOL program.
     @author Zachary Ferguson*)
 open AbstractSyntaxTree
 open ProgramString
