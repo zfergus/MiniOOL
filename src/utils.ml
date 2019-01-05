@@ -10,11 +10,11 @@ let print_warning msg =
 
 (** Colorful logo of MiniOOL including some help and version information. *)
 let logo = "
-\027[36;1m ╭─╮╭─╮╭─╮      ╭─╮\027[0m\027[31;1m╭────╮\027[0m\027[32;1m╭────╮\027[0m\027[35;1m╭─╮  \027[0m │ Type \"\\help\" for help
-\027[36;1m │    │╰─╯╭────╮╰─╯\027[0m\027[31;1m│ ╭╮ │\027[0m\027[32;1m│ ╭╮ │\027[0m\027[35;1m│ │  \027[0m │ Type \"\\exit\" or press Ctrl-D to exit
-\027[36;1m │ ╭╮ │╭─╮│ ╭╮ │╭─╮\027[0m\027[31;1m│ ││ │\027[0m\027[32;1m│ ││ │\027[0m\027[35;1m│ │  \027[0m │ Honors Programming Languages
-\027[36;1m │ ││ ││ ││ ││ ││ │\027[0m\027[31;1m│ ╰╯ │\027[0m\027[32;1m│ ╰╯ │\027[0m\027[35;1m│ ╰─╮\027[0m │ Version Fall 2018
-\027[36;1m ╰─╯╰─╯╰─╯╰─╯╰─╯╰─╯\027[0m\027[31;1m╰────╯\027[0m\027[32;1m╰────╯\027[0m\027[35;1m╰───╯\027[0m │ Created by Zachary Ferguson
+\027[36m ╭─╮╭─╮╭─╮      ╭─╮\027[0m\027[31m╭────╮\027[0m\027[32m╭────╮\027[0m\027[35m╭─╮  \027[0m │ Type \"\\help\" for help
+\027[36m │    │╰─╯╭────╮╰─╯\027[0m\027[31m│ ╭╮ │\027[0m\027[32m│ ╭╮ │\027[0m\027[35m│ │  \027[0m │ Type \"\\exit\" or press Ctrl-D to exit
+\027[36m │ ╭╮ │╭─╮│ ╭╮ │╭─╮\027[0m\027[31m│ ││ │\027[0m\027[32m│ ││ │\027[0m\027[35m│ │  \027[0m │ Honors Programming Languages
+\027[36m │ ││ ││ ││ ││ ││ │\027[0m\027[31m│ ╰╯ │\027[0m\027[32m│ ╰╯ │\027[0m\027[35m│ ╰─╮\027[0m │ Version Fall 2018
+\027[36m ╰─╯╰─╯╰─╯╰─╯╰─╯╰─╯\027[0m\027[31m╰────╯\027[0m\027[32m╰────╯\027[0m\027[35m╰───╯\027[0m │ Created by Zachary Ferguson
 ";;
 
 let help ="
@@ -64,5 +64,5 @@ Interpreter Directives:
  • \\verbose:       (verbosely display the steps of interpretation including
                      the abstract syntax tree (same as the command line option
                      --verbose))
- • \\quite:         (the opposite of \\verbose, turn off verbose information)
+ • \\quiet:         (the opposite of \\verbose, turn off verbose information)
 "

@@ -3,7 +3,7 @@ malloc(r);
 var sum;
 sum = proc x: {
     r.Result = x;
-    r.Sum_rest = proc y: {
+    r.SumRest = proc y: {
         r.Result = r.Result + y;
     };
 };
@@ -11,7 +11,7 @@ sum = proc x: {
 sum(0);
 var i; i = 1;
 while (i <= 100) {
-    r.Sum_rest(i);
+    r.SumRest(i);
     i = i + 1
 };
 r = 5050 - r.Result

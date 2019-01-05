@@ -52,7 +52,7 @@ let do_directive dir =
   (** "exit" | "quit" -> exit MiniOOL *)
   | "exit" | "quit" -> raise Lexer.Eof
   | "verbose" -> Flags.verbose := true
-  | "quite" -> Flags.verbose := false
+  | "quiet" -> Flags.verbose := false
   (** _ -> fail because of an unknown directive *)
   | _ -> failwith (Printf.sprintf "Unknown directive \"%s\"" dir);;
 %} (* declarations *)
