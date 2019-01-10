@@ -1,6 +1,0 @@
-#!/bin/bash
-if hash rlwrap 2>/dev/null; then
-    rlwrap ./bin/MiniOOL_raw "$@"
-else
-    ./bin/MiniOOL_raw "$@"
-fi
