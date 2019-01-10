@@ -1,7 +1,17 @@
+<a name="logo"/>
+<p align="center">
+<img src="logo.svg" alt="MiniOOL Logo" width="300px">
+</p>
+
 # MiniOOL
 
-A mini object-oriented language.<br>
-Created by Zachary Ferguson for Honors Programming Languages (Fall 2018).
+**MiniOOL** is a **mini** **o**bject-**o**riented **l**anguage. Written in OCaml,
+this mini programming language features integer arithmetic, boolean operations,
+control structures, recursive procedures, parallelism, and basic objects with
+fields.
+
+Created by Zachary Ferguson for CSCI-GA.3110: Honors Programming Languages
+(Fall 2018) at New York University.
 
 See `ferguson-zachary-MiniOOL-report.pdf` for a discussion of design decisions,
 implementation details, and some examples covering the features of MiniOOL.
@@ -20,7 +30,7 @@ command `opam install menhir`.
 
 ## Using MiniOOL
 
-To start an interactive session run the `./MiniOOL` from the project directory.
+To start an interactive session run `./MiniOOL` from the project directory.
 
 The optional command line arguments to MiniOOL are
 
