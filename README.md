@@ -3,8 +3,6 @@
 <img src="logo.svg" alt="MiniOOL Logo" width="450px">
 </p>
 
-# MiniOOL
-
 **MiniOOL** is a **mini** **o**bject-**o**riented **l**anguage. Written in OCaml,
 this mini programming language features integer arithmetic, boolean operations,
 control structures, recursive procedures, parallelism, and basic objects with
