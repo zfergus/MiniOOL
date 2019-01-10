@@ -1,6 +1,6 @@
 <a name="logo"/>
 <p align="center">
-<img src="logo.svg" alt="MiniOOL Logo" width="300px">
+<img src="logo.svg" alt="MiniOOL Logo" width="450px">
 </p>
 
 # MiniOOL
