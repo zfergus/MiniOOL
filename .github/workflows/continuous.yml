@@ -10,34 +10,33 @@ on:
 
 jobs:
   Build:
-    name: ${{ matrix.name }}
-    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        include:
-          - os: macos-latest
-            name: macOS
-          - os: ubuntu-latest
-            name: Linux
+        os: 
+          - ubuntu-latest
+          - macos-latest
+        ocaml-compiler:
+          - 4.13.x
+        
+    runs-on: ${{ matrix.os }}
+        
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Use OCaml ${{ matrix.ocaml-compiler }}
+        uses: ocaml/setup-ocaml@v2
         with:
-          fetch-depth: 10
-
-      - name: Dependencies (Linux)
-        if: runner.os == 'Linux'
-        run: sudo apt-get install ocaml opam
+          ocaml-compiler: ${{ matrix.ocaml-compiler }}
 
       - name: Dependencies (macOS)
         if: runner.os == 'macOS'
-        run: brew install ocaml opam rlwrap
+        run: brew install rlwrap
         
       - name: Dependencies (ocaml)
         run: |
-          opam init
-          opam install menhir
+          opam install -y menhir
 
       - name: Build
         run: make -j2
