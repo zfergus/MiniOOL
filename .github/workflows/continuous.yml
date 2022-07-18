@@ -28,7 +28,7 @@ jobs:
 
       - name: Dependencies (Linux)
         if: runner.os == 'Linux'
-        run: sudo apt-get install ocaml opam
+        run: sudo apt-get install ocaml opam -y
 
       - name: Dependencies (macOS)
         if: runner.os == 'macOS'
@@ -36,8 +36,8 @@ jobs:
         
       - name: Dependencies (ocaml)
         run: |
-          opam init
-          opam install menhir
+          opam init -y
+          opam install -y menhir
 
       - name: Build
         run: make -j2
