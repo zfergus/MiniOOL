@@ -32,7 +32,9 @@ jobs:
 
       - name: Dependencies (macOS)
         if: runner.os == 'macOS'
-        run: brew install ocaml opam
+        run:
+          opam init
+          brew install ocaml opam rlwrap
         
       - name: Dependencies (ocaml)
         run: opam install menhir
